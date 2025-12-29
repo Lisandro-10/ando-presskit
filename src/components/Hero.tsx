@@ -9,7 +9,7 @@ export default function Hero() {
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
-          src="/hero-bg.jpg"
+          src="/photos/hero-bg.jpg"
           alt="ANDO DJ Performance"
           fill
           className="object-cover"

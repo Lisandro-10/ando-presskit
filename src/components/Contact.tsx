@@ -50,8 +50,6 @@ export default function Contact() {
             );
           })}
         </div>
-        
-        <p className="text-sm text-ando-text/50">Made with Visily</p>
       </motion.div>
     </section>
   );
