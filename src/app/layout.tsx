@@ -7,11 +7,13 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'ANDO - Progressive & Tech House DJ',
-  description: 'Official presskit - Progressive House & Tech House',
+  description: 'Official presskit - Groove, Ritmos Bailables y Underground Elegante',
+  keywords: ['ANDO', 'DJ', 'Progressive House', 'Tech House', 'Electronic Music'],
   openGraph: {
     title: 'ANDO - DJ Presskit',
     description: 'Progressive House & Tech House',
     type: 'website',
+    images: ['/hero-bg.jpg'],
   },
 };
 
