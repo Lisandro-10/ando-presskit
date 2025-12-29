@@ -15,7 +15,7 @@ export default function Hero() {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-ando-navy/70 via-ando-navy/50 to-ando-navy" />
+        {/* <div className="absolute inset-0 bg-gradient-to-b from-ando-navy/70 via-ando-navy/50 to-ando-navy" /> */}
       </div>
 
       {/* Content */}
@@ -28,12 +28,12 @@ export default function Hero() {
           className="p-8 lg:p-12"
         >
           <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-ando-cyan bg-ando-navy/80">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-ando-cyan">
               <span className="text-xl font-bold text-ando-cyan">A</span>
             </div>
-            <div className="text-sm text-ando-text">
-              <p className="font-semibold">Groove, Ritmos Bailables y</p>
-              <p className="font-semibold">Underground Elegante</p>
+            <div className="text-sm text-white">
+              <p className="font-bold">Groove, Ritmos Bailables y</p>
+              <p className="font-bold">Underground Elegante</p>
             </div>
           </div>
         </motion.div>
