@@ -40,10 +40,26 @@ export const presskitData = {
   ],
   
   photos: [
-    "/photos/photo-1.jpg",
-    "/photos/photo-2.jpg",
-    "/photos/photo-3.jpg",
-    "/photos/photo-4.jpg",
+    {
+      src: "/photos/photo-1.jpg",
+      title: "CRUCESITA",
+      description: "",
+    },
+    {
+      src: "/photos/photo-2.jpg",
+      title: "FINCA LA ANITA",
+      description: "",
+    },
+    {
+      src: "/photos/photo-3.jpg",
+      title: "CERRO DE LA CRUZ",
+      description: "",
+    },
+    {
+      src: "/photos/photo-4.jpg",
+      title: "MUNDO VAPEO",
+      description: "",
+    },
   ],
   
   technicalRider: {
