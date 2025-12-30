@@ -60,7 +60,7 @@ export default function Contact() {
           className="flex items-center justify-center gap-3 text-white/80 transition-colors hover:text-ando-cyan"
         >
           <FaEnvelope className="text-xl" />
-          <span className="text-sm lg:text-base">info.andu.ku@gmail.com</span>
+          <span className="text-sm lg:text-base">info.ando.ku@gmail.com</span>
         </a>
       </motion.div>
     </section>
