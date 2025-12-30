@@ -29,7 +29,7 @@ export default function Hero() {
         >
           <div className="flex items-center gap-3">
             <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-ando-cyan">
-              <span className="text-xl font-bold text-ando-cyan">A</span>
+              <Image src="/logo.png" alt="ANDO Logo" width={32} height={32} />
             </div>
             <div className="text-sm text-white">
               <p className="font-bold">Groove, Ritmos Bailables y</p>

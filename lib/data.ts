@@ -4,9 +4,9 @@ export const presskitData = {
   },
   
   biography: {
-    column1: `ANDO es un proyecto del sonido con una habilidad innata para fusionar ritmos profundos de house progresivo con la cálida energía del tech house. Sus sets son viajes envolventes, construidos sobre capas de melodías emotivas y bajos contundentes, diseñados para que el público que mantiene en el dance. Originario de las vibrantes escenas musicales de Berlín, ANDO ha conseguido una reputación por su habilidad de selección musical y su capacidad para leer la energía de la pista, creando experiencias que trascienden lo auditivo y conectan con los corazones de quienes bailan.`,
+    column1: `ANDO es un proyecto de música House conformado por Juan Pablo y Lisandro Andia, dos primos unidos por la música y el descubrimiento de sonidos en conjunto. Su propuesta sonora transita entre la profundidad del Progressive House y la energía del Tech House, convergiendo siempre en un groove persistente que funciona como hilo conductor de su identidad. La narrativa de sus sets es progresiva, evolucionando desde sonidos orgánicos hacia momentos de mayor intensidad.`,
     
-    column2: `Con una discografía que incluye lanzamientos en sellos discográficos influyentes de escenas de las metrópolis, ANDO se ha consolidado como una figura emergente en la escena electrónica. Su enfoque en la producción está marcado por texturas sonoras ricas y envolventes, que capturan tanto la potencia de bajos, inolvidable a una experiencia única. Cada set que presenta es el resultado de años de investigación sonora, una búsqueda constante de las primeras de una noche inolvidable, una sinfonía de ritmos que se mantienen en movimiento y melodías que resuenan mucho después de que la música desaparece.`,
+    column2: `Lo que define a ANDO es la química natural en el set. Haber crecido juntos escuchando música les permite retroalimentar sus gustos logrando una conexión que se traduce en un sello propio.`,
   },
   
   stats: [
@@ -59,13 +59,17 @@ export const presskitData = {
     ],
   },
   
-  contact: {
-    email: "booking@ando-music.com",
-    socials: [
-      { platform: "spotify", url: "https://spotify.com/ando" },
-      { platform: "instagram", url: "https://instagram.com/ando" },
-      { platform: "soundcloud", url: "https://soundcloud.com/ando" },
-      { platform: "x", url: "https://x.com/ando" },
-    ],
-  },
+  contacts: [
+    {
+      name: "Lisandro Andia",
+      email: "lisandroandia14@gmail.com",
+      phone: "+54 9 261 2567201",
+      instagram: "https://instagram.com/lisan_andia",
+    },
+    {
+      name: "Juan Pablo Andia",
+      phone: "+54 9 261 2191185",
+      instagram: "https://instagram.com/coloandia",
+    }
+  ],
 };
