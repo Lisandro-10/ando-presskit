@@ -4,9 +4,9 @@ export const presskitData = {
   },
   
   biography: {
-    column1: `ANDO es un proyecto de música House conformado por Juan Pablo y Lisandro Andia, dos primos unidos por la música y el descubrimiento de sonidos en conjunto. Su propuesta sonora transita entre la profundidad del Progressive House y la energía del Tech House, convergiendo siempre en un groove persistente que funciona como hilo conductor de su identidad. La narrativa de sus sets es progresiva, evolucionando desde sonidos orgánicos hacia momentos de mayor intensidad.`,
+    column1: `<span class="font-orbitron">ANDO</span> es un proyecto de música House conformado por Juan Pablo y Lisandro Andia, dos primos unidos por la música y el descubrimiento de sonidos en conjunto. Su propuesta sonora transita entre la profundidad del Progressive House y la energía del Tech House, convergiendo siempre en un groove persistente que funciona como hilo conductor de su identidad. La narrativa de sus sets es progresiva, evolucionando desde sonidos orgánicos hacia momentos de mayor intensidad.`,
     
-    column2: `Lo que define a ANDO es la química natural en el set. Haber crecido juntos escuchando música les permite retroalimentar sus gustos logrando una conexión que se traduce en un sello propio.`,
+    column2: `Lo que define a <span class="font-orbitron">ANDO</span> es la química natural en el set. Haber crecido juntos escuchando música les permite retroalimentar sus gustos logrando una conexión que se traduce en un sello propio.`,
   },
   
   stats: [

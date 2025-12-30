@@ -16,6 +16,10 @@ const config: Config = {
         'ando-text': '#1a1a2e',
       },
     },
+    fontFamily: {
+      'orbitron': ['var(--font-orbitron)'],
+      'spaceGrotesk': ['var(--font-space-grotesk)'],
+    },
   },
   plugins: [],
 };

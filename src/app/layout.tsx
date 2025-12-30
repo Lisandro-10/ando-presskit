@@ -1,9 +1,10 @@
 import { Analytics } from '@vercel/analytics/react';
 import type { Metadata } from 'next';
-import { Orbitron } from 'next/font/google';
+import { Orbitron, Space_Grotesk } from 'next/font/google';
 import './globals.css';
 
-const orbitron = Orbitron({ subsets: ['latin'] });
+const orbitron = Orbitron({ subsets: ['latin'], variable: '--font-orbitron' });
+const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-space-grotesk' });
 
 export const metadata: Metadata = {
   title: 'ANDO - Progressive & Tech House DJ',
@@ -24,7 +25,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body className={orbitron.className}>
+      <body className={`${orbitron.variable} ${spaceGrotesk.variable} font-orbitron`}>
         {children}
         <Analytics />
       </body>

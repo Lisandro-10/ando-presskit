@@ -19,12 +19,12 @@ export default function Biography() {
         </h2>
         
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
-          <p className="text-ando-text/80 leading-relaxed">
-            {presskitData.biography.column1}
-          </p>
-          <p className="text-ando-text/80 leading-relaxed">
-            {presskitData.biography.column2}
-          </p>
+          <p className="font-spaceGrotesk text-ando-text/80 leading-relaxed"
+          dangerouslySetInnerHTML={{ __html: presskitData.biography.column1 }}
+          />
+          <p className="font-spaceGrotesk text-ando-text/80 leading-relaxed"
+          dangerouslySetInnerHTML={{ __html: presskitData.biography.column2 }}
+          />
         </div>
       </motion.div>
     </section>
