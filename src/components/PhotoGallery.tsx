@@ -59,32 +59,17 @@ export default function PhotoGallery() {
         </div>
 
         {/* Mobile Navigation */}
-        <div className="mt-4 flex items-center justify-between">
+        <div className="mt-4 flex items-center justify-around">
           <button
             onClick={prevSlide}
-            className="flex h-10 w-12 items-center justify-center bg-ando-cyan/20 text-ando-cyan"
+            className="flex h-10 w-16 items-center justify-center bg-ando-cyan/20 text-ando-cyan rounded-full"
           >
             <FaChevronLeft />
           </button>
           
-          <div className="flex gap-2">
-            {photos.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => {
-                  setDirection(index > currentIndex ? 1 : -1);
-                  setCurrentIndex(index);
-                }}
-                className={`h-2.5 w-2.5 rounded-full transition-colors ${
-                  index === currentIndex ? 'bg-ando-cyan' : 'bg-white/30'
-                }`}
-              />
-            ))}
-          </div>
-          
           <button
             onClick={nextSlide}
-            className="flex h-10 w-12 items-center justify-center bg-ando-cyan/20 text-ando-cyan"
+            className="flex h-10 w-16 items-center justify-center bg-ando-cyan/20 text-ando-cyan rounded-full"
           >
             <FaChevronRight />
           </button>
@@ -144,22 +129,6 @@ export default function PhotoGallery() {
               {/* Cyan accent line */}
               <div className="absolute bottom-0 left-0 right-0 h-1 bg-ando-cyan transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
             </motion.div>
-          ))}
-        </div>
-
-        {/* Dots indicator */}
-        <div className="mt-6 flex justify-center gap-2">
-          {photos.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => {
-                setDirection(index > currentIndex ? 1 : -1);
-                setCurrentIndex(index);
-              }}
-              className={`h-3 w-3 rounded-full transition-colors ${
-                index === currentIndex ? 'bg-ando-cyan' : 'bg-white/30 hover:bg-white/50'
-              }`}
-            />
           ))}
         </div>
       </div>

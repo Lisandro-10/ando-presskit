@@ -3,6 +3,7 @@ import Biography from '../components/Biography';
 import PhotoGallery from '../components/PhotoGallery';
 import Contact from '../components/Contact';
 import Hero from '../components/Hero';
+import VideoGallery from '../components/VideoGallery';
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <Hero />
       <Biography />
       <PhotoGallery />
+      <VideoGallery />
       {/* <Discography /> */}
       {/* <Stats /> */}
       {/* <TechRider /> */}

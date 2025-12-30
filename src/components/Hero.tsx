@@ -28,8 +28,8 @@ export default function Hero() {
           className="p-8 lg:p-12"
         >
           <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-ando-cyan">
-              <Image src="/logo.png" alt="ANDO Logo" width={64} height={64} className="object-none"/>
+            <div className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-ando-cyan">
+              <Image src="/logo.png" alt="ANDO Logo" width={128} height={128} className="object-none"/>
             </div>
             <div className="text-sm text-white">
               <p className="font-bold">Groove, Ritmos Bailables y</p>

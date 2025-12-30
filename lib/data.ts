@@ -42,25 +42,38 @@ export const presskitData = {
   photos: [
     {
       src: "/photos/photo-1.jpg",
-      title: "CRUCESITA",
-      description: "",
-    },
-    {
-      src: "/photos/photo-2.jpg",
       title: "FINCA LA ANITA",
       description: "",
     },
     {
-      src: "/photos/photo-3.jpg",
+      src: "/photos/photo-2.jpg",
       title: "CERRO DE LA CRUZ",
       description: "",
     },
     {
+      src: "/photos/photo-3.jpg",
+      title: "MUNDO VAPPEO",
+      description: "",
+    },
+    {
       src: "/photos/photo-4.jpg",
-      title: "MUNDO VAPEO",
+      title: "CRUCESITA",
       description: "",
     },
   ],
+
+  videos: [
+    {
+      src: '/videos/video-1.MP4',
+    },
+    {
+      src: '/videos/video-2.mp4',
+    },
+    {
+      src: '/videos/video-3.mp4',
+    },
+  ],
+
   
   technicalRider: {
     title: "Resumen del Rider Técnico",
