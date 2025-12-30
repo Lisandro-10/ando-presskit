@@ -1,43 +1,168 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { presskitData } from '../../lib/data';
 
 export default function PhotoGallery() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+  const photos = presskitData.photos;
+
+  const nextSlide = () => {
+    setDirection(1);
+    setCurrentIndex((prev) => (prev + 1) % photos.length);
+  };
+
+  const prevSlide = () => {
+    setDirection(-1);
+    setCurrentIndex((prev) => (prev - 1 + photos.length) % photos.length);
+  };
+
+  // Get 4 visible photos cycling infinitely
+  const getVisiblePhotos = () => {
+    const visible = [];
+    for (let i = 0; i < 4; i++) {
+      const index = (currentIndex + i) % photos.length;
+      visible.push({ ...photos[index], originalIndex: index });
+    }
+    return visible;
+  };
+
+  const visiblePhotos = getVisiblePhotos();
+
   return (
-    <section className="px-6 py-20 lg:px-12">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="mx-auto max-w-6xl"
-      >
-        <h2 className="mb-12 text-center text-4xl font-bold text-ando-text lg:text-5xl">
-          Fotos Profesionales
-        </h2>
-        
-        <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6">
-          {presskitData.photos.map((photo, index) => (
+    <section className="w-full pb-12 lg:pb-4">
+      {/* Mobile: Single Carousel */}
+      <div className="lg:hidden">
+        <div className="relative aspect-[3/4] w-full overflow-hidden">
+          <AnimatePresence mode="wait" custom={direction}>
             <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="relative aspect-square overflow-hidden rounded-lg"
+              key={currentIndex}
+              custom={direction}
+              initial={{ opacity: 0, x: direction > 0 ? 100 : -100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: direction > 0 ? -100 : 100 }}
+              transition={{ duration: 0.3 }}
+              className="absolute inset-0"
             >
               <Image
-                src={photo}
-                alt={`ANDO Professional Photo ${index + 1}`}
+                src={photos[currentIndex].src}
+                alt={photos[currentIndex].title}
                 fill
-                className="object-cover transition-transform duration-300 hover:scale-110"
+                className="object-cover"
               />
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* Mobile Navigation */}
+        <div className="mt-4 flex items-center justify-between">
+          <button
+            onClick={prevSlide}
+            className="flex h-10 w-12 items-center justify-center bg-ando-cyan/20 text-ando-cyan"
+          >
+            <FaChevronLeft />
+          </button>
+          
+          <div className="flex gap-2">
+            {photos.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  setDirection(index > currentIndex ? 1 : -1);
+                  setCurrentIndex(index);
+                }}
+                className={`h-2.5 w-2.5 rounded-full transition-colors ${
+                  index === currentIndex ? 'bg-ando-cyan' : 'bg-white/30'
+                }`}
+              />
+            ))}
+          </div>
+          
+          <button
+            onClick={nextSlide}
+            className="flex h-10 w-12 items-center justify-center bg-ando-cyan/20 text-ando-cyan"
+          >
+            <FaChevronRight />
+          </button>
+        </div>
+
+        {/* Mobile Description */}
+        <motion.div
+          key={currentIndex}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="mt-4 text-center"
+        >
+          <h3 className="text-lg font-bold text-white">{photos[currentIndex].title}</h3>
+          <p className="mt-2 text-sm text-white/70">{photos[currentIndex].description}</p>
+        </motion.div>
+      </div>
+
+      {/* Desktop: 4-Column Carousel - slides 1 at a time */}
+      <div className="hidden lg:block relative">
+        {/* Navigation Arrows */}
+        <button
+          onClick={prevSlide}
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-10 flex h-12 w-12 items-center justify-center bg-ando-cyan/80 text-ando-text hover:bg-ando-cyan transition-colors"
+        >
+          <FaChevronLeft className="text-xl" />
+        </button>
+        <button
+          onClick={nextSlide}
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-10 flex h-12 w-12 items-center justify-center bg-ando-cyan/80 text-ando-text hover:bg-ando-cyan transition-colors"
+        >
+          <FaChevronRight className="text-xl" />
+        </button>
+
+        {/* Photos Grid */}
+        <div className="grid grid-cols-4 gap-0">
+          {visiblePhotos.map((photo, index) => (
+            <motion.div
+              key={`${currentIndex}-${photo.originalIndex}`}
+              initial={{ opacity: 0, x: direction > 0 ? 50 : -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4, delay: direction > 0 ? index * 0.05 : (3 - index) * 0.05 }}
+              className="group relative aspect-[3/4] overflow-hidden"
+            >
+              <Image
+                src={photo.src}
+                alt={photo.title}
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              {/* Hover overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <h3 className="text-lg font-bold text-white">{photo.title}</h3>
+                  <p className="mt-2 text-sm text-white/80 line-clamp-3">{photo.description}</p>
+                </div>
+              </div>
+              {/* Cyan accent line */}
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-ando-cyan transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
             </motion.div>
           ))}
         </div>
-      </motion.div>
+
+        {/* Dots indicator */}
+        <div className="mt-6 flex justify-center gap-2">
+          {photos.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => {
+                setDirection(index > currentIndex ? 1 : -1);
+                setCurrentIndex(index);
+              }}
+              className={`h-3 w-3 rounded-full transition-colors ${
+                index === currentIndex ? 'bg-ando-cyan' : 'bg-white/30 hover:bg-white/50'
+              }`}
+            />
+          ))}
+        </div>
+      </div>
     </section>
   );
 }
