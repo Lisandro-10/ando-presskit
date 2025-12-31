@@ -46,13 +46,13 @@ export const presskitData = {
       description: "",
     },
     {
-      src: "/photos/photo-2.jpg",
-      title: "CERRO DE LA CRUZ",
+      src: "/photos/photo-3.jpg",
+      title: "MUNDO VAPPEO",
       description: "",
     },
     {
-      src: "/photos/photo-3.jpg",
-      title: "MUNDO VAPPEO",
+      src: "/photos/photo-2.JPEG",
+      title: "UTILCA",
       description: "",
     },
     {
@@ -68,6 +68,9 @@ export const presskitData = {
     },
     {
       src: '/videos/video-2.mp4',
+    },
+    {
+      src: '/videos/video-5.MP4',
     },
     {
       src: '/videos/video-3.mp4',

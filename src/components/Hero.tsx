@@ -32,8 +32,7 @@ export default function Hero() {
               <Image src="/logo.png" alt="ANDO Logo" width={128} height={128} className="object-none"/>
             </div>
             <div className="text-sm text-white">
-              <p className="font-bold">Groove, Ritmos Bailables y</p>
-              <p className="font-bold">Underground Elegante</p>
+              <p className="font-bold">Groove y Ritmos Bailables</p>
             </div>
           </div>
         </motion.div>

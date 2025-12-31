@@ -98,7 +98,7 @@ export default function VideoGallery() {
         </div>
 
         {/* Desktop: 3 videos centrados */}
-        <div className="hidden lg:grid lg:grid-cols-3 lg:gap-6 lg:justify-center">
+        <div className="hidden lg:grid lg:grid-cols-4 lg:gap-6 lg:justify-center">
           {videos.map((video, index) => (
             <VideoCard key={index} video={video} />
           ))}
