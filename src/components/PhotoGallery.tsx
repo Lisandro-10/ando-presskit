@@ -92,13 +92,13 @@ export default function PhotoGallery() {
         {/* Navigation Arrows */}
         <button
           onClick={prevSlide}
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-10 flex h-12 w-12 items-center justify-center bg-ando-cyan/80 text-ando-text hover:bg-ando-cyan transition-colors"
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-10 flex h-12 w-12 items-center justify-center text-white hover:bg-white/40 rounded-full transition-colors"
         >
           <FaChevronLeft className="text-xl" />
         </button>
         <button
           onClick={nextSlide}
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-10 flex h-12 w-12 items-center justify-center bg-ando-cyan/80 text-ando-text hover:bg-ando-cyan transition-colors"
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-10 flex h-12 w-12 items-center justify-center text-white hover:bg-white/40 rounded-full transition-colors"
         >
           <FaChevronRight className="text-xl" />
         </button>
