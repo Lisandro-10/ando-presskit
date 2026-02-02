@@ -9,36 +9,6 @@ export const presskitData = {
     column2: `Lo que define a <span class="font-orbitron">ANDO</span> es la química natural en el set. Haber crecido juntos escuchando música les permite retroalimentar sus gustos logrando una conexión que se traduce en un sello propio.`,
   },
   
-  stats: [
-    { value: "500K+", label: "Oyentes Mensuales" },
-    { value: "25M+", label: "Reproducciones Totales" },
-    { value: "150K+", label: "Seguidores de Podcast" },
-    { value: "200K+", label: "Seguidores de Instagram" },
-  ],
-  
-  releases: [
-    {
-      title: "Título del Release",
-      artwork: "/releases/release-1.jpg",
-      link: "#",
-    },
-    {
-      title: "Título del Release",
-      artwork: "/releases/release-2.jpg",
-      link: "#",
-    },
-    {
-      title: "Título del Release",
-      artwork: "/releases/release-3.jpg",
-      link: "#",
-    },
-    {
-      title: "Título del Release",
-      artwork: "/releases/release-4.jpg",
-      link: "#",
-    },
-  ],
-  
   photos: [
     {
       src: "/photos/photo-1.jpg",
@@ -53,11 +23,6 @@ export const presskitData = {
     {
       src: "/photos/photo-2.JPEG",
       title: "UTILCA",
-      description: "",
-    },
-    {
-      src: "/photos/photo-4.jpg",
-      title: "CRUCESITA",
       description: "",
     },
   ],
@@ -76,20 +41,6 @@ export const presskitData = {
       src: '/videos/video-3.mp4',
     },
   ],
-
-  
-  technicalRider: {
-    title: "Resumen del Rider Técnico",
-    specs: [
-      "Sistema de sonido principal (PA): alta calidad, adecuado para el tamaño del lugar, con respuesta de frecuencia plana y headroom suficiente.",
-      "Monitores de cabina: 2 x monitores de escenario activos de rango completo, colocados a ambos lados de la cabina del DJ con ecualizador y nivel de volumen independientes.",
-      "Mezclador: Pioneer DJM-900NXS2 o Allen & Heath Xone:96.",
-      "Reproductores: 3 x Pioneer CDJ-3000 o 3 x Pioneer CDJ-2000NXS2.",
-      "Iluminación: 1 xbury láser, con control de intensidad y capacidad para efectos visuales dinámicos (luces direccionadas, cambiantes de formación estroboscópica).",
-      "Escenario: Mesa de DJ estable y cómoda, con espacio suficiente para equipos adicional del artista. Superficie sólida y portátil con acceso libre del DJ.",
-      "Soporte técnico: Un técnico de sonido y un técnico de iluminación disponibles durante todo el montaje, prueba de sonido y actuación.",
-    ],
-  },
   
   contacts: [
     {
