@@ -21,10 +21,10 @@ export default function PhotoGallery() {
     setCurrentIndex((prev) => (prev - 1 + photos.length) % photos.length);
   };
 
-  // Get 4 visible photos cycling infinitely
+  // Get 3 visible photos cycling infinitely
   const getVisiblePhotos = () => {
     const visible = [];
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 3; i++) {
       const index = (currentIndex + i) % photos.length;
       visible.push({ ...photos[index], originalIndex: index });
     }
@@ -92,19 +92,19 @@ export default function PhotoGallery() {
         {/* Navigation Arrows */}
         <button
           onClick={prevSlide}
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-10 flex h-12 w-12 items-center justify-center bg-ando-cyan/80 text-ando-text hover:bg-ando-cyan transition-colors"
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-10 flex h-12 w-12 items-center justify-center text-white hover:bg-white/40 rounded-full transition-colors"
         >
           <FaChevronLeft className="text-xl" />
         </button>
         <button
           onClick={nextSlide}
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-10 flex h-12 w-12 items-center justify-center bg-ando-cyan/80 text-ando-text hover:bg-ando-cyan transition-colors"
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-10 flex h-12 w-12 items-center justify-center text-white hover:bg-white/40 rounded-full transition-colors"
         >
           <FaChevronRight className="text-xl" />
         </button>
 
         {/* Photos Grid */}
-        <div className="grid grid-cols-4 gap-0">
+        <div className="grid grid-cols-3 gap-0">
           {visiblePhotos.map((photo, index) => (
             <motion.div
               key={`${currentIndex}-${photo.originalIndex}`}
