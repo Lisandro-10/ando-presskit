@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 export default function Hero() {
   return (
-    <section className="relative h-screen w-full overflow-hidden">
+    <section className="relative h-screen w-full overflow-hidden bg-ando-navy">
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
@@ -15,38 +15,46 @@ export default function Hero() {
           className="object-cover"
           priority
         />
-        {/* <div className="absolute inset-0 bg-gradient-to-b from-ando-navy/70 via-ando-navy/50 to-ando-navy" /> */}
+        <div className="absolute inset-0 bg-gradient-to-b from-ando-navy/60 via-transparent to-ando-navy" />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex h-full flex-col">
-        {/* Logo */}
+      <div className="relative z-10 flex h-full flex-col px-6 lg:px-10">
+        {/* Top Bar - Logo + Tagline */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="p-8 lg:p-12"
+          className="flex items-center gap-3 pt-6 lg:pt-10"
         >
-          <div className="flex items-center gap-3">
-            <div className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-ando-cyan">
-              <Image src="/logo.png" alt="ANDO Logo" width={128} height={128} className="object-none"/>
-            </div>
-            <div className="text-sm text-white">
-              <p className="font-bold">Groove y Ritmos Bailables</p>
-            </div>
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/50">
+            <Image src="/logo.png" alt="ANDO Logo" width={64} height={64} className="object-none" />
           </div>
+          <p className="text-[10px] uppercase tracking-[0.25em] text-white">
+            Groove y Ritmos Bailables
+          </p>
         </motion.div>
 
-        {/* Center Logo */}
-        <div className="flex flex-1 items-center justify-center">
+        {/* Center - Name + Genre (bottom-left on mobile, center on desktop) */}
+        <div className="flex flex-1 flex-col items-start justify-end pb-16 lg:items-center lg:justify-center lg:pb-0">
           <motion.h1
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.3 }}
-            className="text-8xl font-bold text-white md:text-9xl"
+            className="text-7xl font-bold text-white md:text-9xl"
+            style={{ textShadow: '0 2px 20px rgba(0,0,0,0.5)' }}
           >
-            ANDO
+            ANDO<span className="text-ando-cyan">.</span>
           </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="mt-3 text-sm tracking-[0.2em] text-white/90 uppercase md:tracking-[0.3em]"
+            style={{ textShadow: '0 1px 10px rgba(0,0,0,0.7)' }}
+          >
+            <span className="text-ando-cyan">| </span>Progressive House/ Tech House
+          </motion.p>
         </div>
       </div>
     </section>
