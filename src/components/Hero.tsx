@@ -28,7 +28,7 @@ export default function Hero() {
           className="flex items-center gap-3 pt-6 lg:pt-10"
         >
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/50">
-            <Image src="/logo.png" alt="ANDO Logo" width={64} height={64} className="object-none" />
+            A
           </div>
           <p className="text-[10px] uppercase tracking-[0.25em] text-white">
             Groove y Ritmos Bailables
