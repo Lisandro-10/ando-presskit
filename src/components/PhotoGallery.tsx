@@ -21,7 +21,6 @@ export default function PhotoGallery() {
     setCurrentIndex((prev) => (prev - 1 + photos.length) % photos.length);
   };
 
-  // Get 3 visible photos cycling infinitely
   const getVisiblePhotos = () => {
     const visible = [];
     for (let i = 0; i < 3; i++) {
@@ -33,10 +32,54 @@ export default function PhotoGallery() {
 
   const visiblePhotos = getVisiblePhotos();
 
+  // Swipe handling for mobile
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStart === null) return;
+    const diff = touchStart - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) nextSlide();
+      else prevSlide();
+    }
+    setTouchStart(null);
+  };
+
   return (
-    <section className="w-full pb-12 lg:pb-4">
-      {/* Mobile: Single Carousel */}
-      <div className="lg:hidden">
+    <section className="w-full bg-ando-navy">
+      {/* Header: Label + Dots */}
+      <div className="flex items-center justify-between px-6 pb-4 lg:px-10">
+        <p className="text-[10px] uppercase tracking-[0.3em] text-ando-muted">
+          Press Photos
+        </p>
+        {/* Dot indicators - mobile only */}
+        <div className="flex gap-2 lg:hidden">
+          {photos.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => {
+                setDirection(index > currentIndex ? 1 : -1);
+                setCurrentIndex(index);
+              }}
+              className={`h-2 w-2 rounded-full transition-colors ${
+                index === currentIndex ? 'bg-ando-cyan' : 'bg-white/30'
+              }`}
+              aria-label={`Foto ${index + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Mobile: Swipeable single carousel */}
+      <div
+        className="lg:hidden"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
         <div className="relative aspect-[3/4] w-full overflow-hidden">
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
@@ -52,58 +95,28 @@ export default function PhotoGallery() {
                 src={photos[currentIndex].src}
                 alt={photos[currentIndex].title}
                 fill
-                className="object-cover"
+                className="object-cover grayscale"
               />
             </motion.div>
           </AnimatePresence>
         </div>
-
-        {/* Mobile Navigation */}
-        <div className="mt-4 flex items-center justify-around">
-          <button
-            onClick={prevSlide}
-            className="flex h-10 w-16 items-center justify-center bg-ando-cyan/20 text-ando-cyan rounded-full"
-          >
-            <FaChevronLeft />
-          </button>
-          
-          <button
-            onClick={nextSlide}
-            className="flex h-10 w-16 items-center justify-center bg-ando-cyan/20 text-ando-cyan rounded-full"
-          >
-            <FaChevronRight />
-          </button>
-        </div>
-
-        {/* Mobile Description */}
-        <motion.div
-          key={currentIndex}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="mt-4 text-center"
-        >
-          <h3 className="text-lg font-bold text-white">{photos[currentIndex].title}</h3>
-          <p className="mt-2 text-sm text-white/70">{photos[currentIndex].description}</p>
-        </motion.div>
       </div>
 
-      {/* Desktop: 4-Column Carousel - slides 1 at a time */}
+      {/* Desktop: 3-Column Carousel with arrows */}
       <div className="hidden lg:block relative">
-        {/* Navigation Arrows */}
         <button
           onClick={prevSlide}
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-10 flex h-12 w-12 items-center justify-center text-white hover:bg-white/40 rounded-full transition-colors"
+          className="absolute left-4 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full text-white hover:bg-white/20 transition-colors"
         >
           <FaChevronLeft className="text-xl" />
         </button>
         <button
           onClick={nextSlide}
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-10 flex h-12 w-12 items-center justify-center text-white hover:bg-white/40 rounded-full transition-colors"
+          className="absolute right-4 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full text-white hover:bg-white/20 transition-colors"
         >
           <FaChevronRight className="text-xl" />
         </button>
 
-        {/* Photos Grid */}
         <div className="grid grid-cols-3 gap-0">
           {visiblePhotos.map((photo, index) => (
             <motion.div
@@ -117,16 +130,16 @@ export default function PhotoGallery() {
                 src={photo.src}
                 alt={photo.title}
                 fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                className="object-cover grayscale transition-transform duration-500 group-hover:scale-105"
               />
-              {/* Hover overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <div className="absolute bottom-0 left-0 right-0 p-6">
                   <h3 className="text-lg font-bold text-white">{photo.title}</h3>
-                  <p className="mt-2 text-sm text-white/80 line-clamp-3">{photo.description}</p>
+                  {photo.description && (
+                    <p className="mt-2 text-sm text-white/80 line-clamp-3">{photo.description}</p>
+                  )}
                 </div>
               </div>
-              {/* Cyan accent line */}
               <div className="absolute bottom-0 left-0 right-0 h-1 bg-ando-cyan transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
             </motion.div>
           ))}

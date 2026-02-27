@@ -11,9 +11,10 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        'ando-navy': '#ffffff',
+        'ando-navy': '#111111',
         'ando-cyan': '#00d9ff',
-        'ando-text': '#1a1a2e',
+        'ando-text': '#ffffff',
+        'ando-muted': 'rgba(255, 255, 255, 0.6)',
       },
     },
     fontFamily: {
