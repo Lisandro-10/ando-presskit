@@ -11,7 +11,7 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        'ando-navy': '#0d0d1a',
+        'ando-navy': '#111111',
         'ando-cyan': '#00d9ff',
         'ando-text': '#ffffff',
         'ando-muted': 'rgba(255, 255, 255, 0.6)',

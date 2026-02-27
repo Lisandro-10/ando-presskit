@@ -44,7 +44,7 @@ export default function Hero() {
             className="text-7xl font-bold text-white md:text-9xl"
             style={{ textShadow: '0 2px 20px rgba(0,0,0,0.5)' }}
           >
-            ANDO<span className="text-ando-cyan">.</span>
+            ANDO.
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
