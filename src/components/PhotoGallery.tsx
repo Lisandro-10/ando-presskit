@@ -95,7 +95,7 @@ export default function PhotoGallery() {
                 src={photos[currentIndex].src}
                 alt={photos[currentIndex].title}
                 fill
-                className="object-cover"
+                className="object-cover grayscale"
               />
             </motion.div>
           </AnimatePresence>
@@ -130,7 +130,7 @@ export default function PhotoGallery() {
                 src={photo.src}
                 alt={photo.title}
                 fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                className="object-cover grayscale transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <div className="absolute bottom-0 left-0 right-0 p-6">
