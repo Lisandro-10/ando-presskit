@@ -206,49 +206,36 @@ export default function VideoGallery() {
           </div>
         )}
 
-        {/* Desktop: fallback uniform grid — only if < 3 videos */}
-        {videos.length < 3 && (
-          <div className="hidden lg:grid lg:grid-cols-3 lg:gap-4">
-            {videos.map((video, i) => (
+        {videos.length >= 3 && (
+          <div
+            className="hidden lg:grid lg:grid-cols-2 lg:grid-rows-2 lg:gap-4"
+            style={{ height: '78vh' }}
+          >
+            {videos.slice(4, 6).map((video, i) => (
               <VideoCard
-                key={i}
+                key={i + 1}
                 video={video}
                 playOnHover
-                isDimmed={hoveredId !== null && hoveredId !== i}
-                onHoverStart={() => setHoveredId(i)}
+                isDimmed={hoveredId !== null && hoveredId !== i + 1}
+                onHoverStart={() => setHoveredId(i + 1)}
                 onHoverEnd={() => setHoveredId(null)}
-                className={video.orientation === 'tall' ? 'aspect-[9/16]' : 'aspect-video'}
-                animDelay={i * 0.08}
+                className="col-start-1 h-full"
+                animDelay={(i + 1) * 0.08}
               />
             ))}
+            <VideoCard
+              video={videos[3]}
+              playOnHover
+              isDimmed={hoveredId !== null && hoveredId !== 0}
+              onHoverStart={() => setHoveredId(0)}
+              onHoverEnd={() => setHoveredId(null)}
+              className="col-start-2 row-start-1 row-span-2 h-full"
+              animDelay={0}
+            />
+
           </div>
         )}
 
-        {/* Desktop: overflow grid for videos beyond first 3 */}
-        {videos.length > 3 && (() => {
-          const overflow = videos.slice(3);
-          const colsClass =
-            overflow.length === 1 ? 'lg:grid-cols-1' :
-            overflow.length === 2 ? 'lg:grid-cols-2' :
-            'lg:grid-cols-3';
-          return (
-            <div className={`hidden lg:grid lg:gap-4 mt-4 ${colsClass}`}>
-              {overflow.map((video, i) => (
-                <VideoCard
-                  key={i + 3}
-                  video={video}
-                  playOnHover
-                  isDimmed={hoveredId !== null && hoveredId !== i + 3}
-                  onHoverStart={() => setHoveredId(i + 3)}
-                  onHoverEnd={() => setHoveredId(null)}
-                  className={video.orientation === 'tall' ? 'aspect-[9/16] max-h-[70vh]' : 'aspect-video'}
-                  animDelay={i * 0.08}
-                  preloadMode="none"
-                />
-              ))}
-            </div>
-          );
-        })()}
       </motion.div>
     </section>
   );
