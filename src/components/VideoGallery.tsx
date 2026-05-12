@@ -152,7 +152,8 @@ function VideoCard({
 
 export default function VideoGallery() {
   const videos = presskitData.videos as Video[];
-  const [hoveredId, setHoveredId] = useState<number | null>(null);
+  const [hoveredId1, setHoveredId1] = useState<number | null>(null);
+  const [hoveredId2, setHoveredId2] = useState<number | null>(null);
 
   return (
     <section className="relative bg-ando-navy py-16 lg:py-20 overflow-hidden">
@@ -185,9 +186,9 @@ export default function VideoGallery() {
             <VideoCard
               video={videos[0]}
               playOnHover
-              isDimmed={hoveredId !== null && hoveredId !== 0}
-              onHoverStart={() => setHoveredId(0)}
-              onHoverEnd={() => setHoveredId(null)}
+              isDimmed={hoveredId1 !== null && hoveredId1 !== 0}
+              onHoverStart={() => setHoveredId1(0)}
+              onHoverEnd={() => setHoveredId1(null)}
               className="col-span-1 row-span-2 h-full"
               animDelay={0}
             />
@@ -196,9 +197,9 @@ export default function VideoGallery() {
                 key={i + 1}
                 video={video}
                 playOnHover
-                isDimmed={hoveredId !== null && hoveredId !== i + 1}
-                onHoverStart={() => setHoveredId(i + 1)}
-                onHoverEnd={() => setHoveredId(null)}
+                isDimmed={hoveredId1 !== null && hoveredId1 !== i + 1}
+                onHoverStart={() => setHoveredId1(i + 1)}
+                onHoverEnd={() => setHoveredId1(null)}
                 className="h-full"
                 animDelay={(i + 1) * 0.08}
               />
@@ -206,9 +207,9 @@ export default function VideoGallery() {
           </div>
         )}
 
-        {videos.length >= 3 && (
+        {videos.length >= 6 && (
           <div
-            className="hidden lg:grid lg:grid-cols-2 lg:grid-rows-2 lg:gap-4"
+            className="hidden lg:grid lg:grid-cols-2 lg:grid-rows-2 lg:gap-4 lg:mt-4"
             style={{ height: '78vh' }}
           >
             {videos.slice(4, 6).map((video, i) => (
@@ -216,9 +217,9 @@ export default function VideoGallery() {
                 key={i + 1}
                 video={video}
                 playOnHover
-                isDimmed={hoveredId !== null && hoveredId !== i + 1}
-                onHoverStart={() => setHoveredId(i + 1)}
-                onHoverEnd={() => setHoveredId(null)}
+                isDimmed={hoveredId2 !== null && hoveredId2 !== i + 1}
+                onHoverStart={() => setHoveredId2(i + 1)}
+                onHoverEnd={() => setHoveredId2(null)}
                 className="col-start-1 h-full"
                 animDelay={(i + 1) * 0.08}
               />
@@ -226,13 +227,12 @@ export default function VideoGallery() {
             <VideoCard
               video={videos[3]}
               playOnHover
-              isDimmed={hoveredId !== null && hoveredId !== 0}
-              onHoverStart={() => setHoveredId(0)}
-              onHoverEnd={() => setHoveredId(null)}
+              isDimmed={hoveredId2 !== null && hoveredId2 !== 0}
+              onHoverStart={() => setHoveredId2(0)}
+              onHoverEnd={() => setHoveredId2(null)}
               className="col-start-2 row-start-1 row-span-2 h-full"
               animDelay={0}
             />
-
           </div>
         )}
 
