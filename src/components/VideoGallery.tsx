@@ -7,6 +7,7 @@ import { FaVolumeMute, FaVolumeUp } from 'react-icons/fa';
 
 interface Video {
   src: string;
+  orientation?: 'tall' | 'wide';
 }
 
 interface VideoCardProps {
@@ -17,6 +18,7 @@ interface VideoCardProps {
   onHoverEnd?: () => void;
   className?: string;
   animDelay?: number;
+  preloadMode?: 'metadata' | 'none';
 }
 
 function VideoCard({
@@ -27,6 +29,7 @@ function VideoCard({
   onHoverEnd,
   className = '',
   animDelay = 0,
+  preloadMode = 'metadata',
 }: VideoCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -76,7 +79,7 @@ function VideoCard({
   const handleVideoTap = () => {
     if (playOnHover) return;
     if (!videoRef.current) return;
-    if (videoRef.current.paused) videoRef.current.play().catch(() => {});
+    if (videoRef.current.paused) videoRef.current.play().catch(() => { });
     else videoRef.current.pause();
   };
 
@@ -94,9 +97,8 @@ function VideoCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: animDelay }}
-      className={`group relative overflow-hidden rounded-lg bg-white/5 cursor-pointer transition-[filter,opacity] duration-500 ${
-        isDimmed ? 'opacity-50 lg:opacity-100 lg:blur-sm lg:brightness-50' : ''
-      } ${className}`}
+      className={`group relative overflow-hidden rounded-lg bg-white/5 cursor-pointer transition-[filter,opacity] duration-500 ${isDimmed ? 'opacity-50 lg:opacity-100 lg:blur-sm lg:brightness-50' : ''
+        } ${className}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleVideoTap}
@@ -107,7 +109,7 @@ function VideoCard({
         loop
         muted
         playsInline
-        preload="metadata"
+        preload={preloadMode}
         className="h-full w-full object-cover"
       />
 
@@ -149,7 +151,7 @@ function VideoCard({
 }
 
 export default function VideoGallery() {
-  const videos = presskitData.videos;
+  const videos = presskitData.videos as Video[];
   const [hoveredId, setHoveredId] = useState<number | null>(null);
 
   return (
@@ -172,35 +174,81 @@ export default function VideoGallery() {
           ))}
         </div>
 
-        {/* Desktop: Bento asymmetric grid
-            video[0] = hero (col-span-2 row-span-2, left half)
-            videos[1-4] = 2×2 grid (right half, 2 cols × 2 rows) */}
-        <div
-          className="hidden lg:grid lg:grid-cols-4 lg:grid-rows-2 lg:gap-4"
-          style={{ height: '78vh' }}
-        >
-          <VideoCard
-            video={videos[0]}
-            playOnHover
-            isDimmed={hoveredId !== null && hoveredId !== 0}
-            onHoverStart={() => setHoveredId(0)}
-            onHoverEnd={() => setHoveredId(null)}
-            className="col-span-2 row-span-2 h-full"
-            animDelay={0}
-          />
-          {videos.slice(1, 5).map((video, i) => (
+        {/* Desktop: Bento asymmetric grid — only if >= 3 videos
+            video[0] = hero (col-span-2 row-span-2, left 2/3)
+            videos[1-2] = 2 videos stacked vertically (right 1/3) */}
+        {videos.length >= 3 && (
+          <div
+            className="hidden lg:grid lg:grid-cols-2 lg:grid-rows-2 lg:gap-4"
+            style={{ height: '78vh' }}
+          >
             <VideoCard
-              key={i + 1}
-              video={video}
+              video={videos[0]}
               playOnHover
-              isDimmed={hoveredId !== null && hoveredId !== i + 1}
-              onHoverStart={() => setHoveredId(i + 1)}
+              isDimmed={hoveredId !== null && hoveredId !== 0}
+              onHoverStart={() => setHoveredId(0)}
               onHoverEnd={() => setHoveredId(null)}
-              className="h-full"
-              animDelay={(i + 1) * 0.08}
+              className="col-span-1 row-span-2 h-full"
+              animDelay={0}
             />
-          ))}
-        </div>
+            {videos.slice(1, 3).map((video, i) => (
+              <VideoCard
+                key={i + 1}
+                video={video}
+                playOnHover
+                isDimmed={hoveredId !== null && hoveredId !== i + 1}
+                onHoverStart={() => setHoveredId(i + 1)}
+                onHoverEnd={() => setHoveredId(null)}
+                className="h-full"
+                animDelay={(i + 1) * 0.08}
+              />
+            ))}
+          </div>
+        )}
+
+        {/* Desktop: fallback uniform grid — only if < 3 videos */}
+        {videos.length < 3 && (
+          <div className="hidden lg:grid lg:grid-cols-3 lg:gap-4">
+            {videos.map((video, i) => (
+              <VideoCard
+                key={i}
+                video={video}
+                playOnHover
+                isDimmed={hoveredId !== null && hoveredId !== i}
+                onHoverStart={() => setHoveredId(i)}
+                onHoverEnd={() => setHoveredId(null)}
+                className={video.orientation === 'tall' ? 'aspect-[9/16]' : 'aspect-video'}
+                animDelay={i * 0.08}
+              />
+            ))}
+          </div>
+        )}
+
+        {/* Desktop: overflow grid for videos beyond first 3 */}
+        {videos.length > 3 && (() => {
+          const overflow = videos.slice(3);
+          const colsClass =
+            overflow.length === 1 ? 'lg:grid-cols-1' :
+            overflow.length === 2 ? 'lg:grid-cols-2' :
+            'lg:grid-cols-3';
+          return (
+            <div className={`hidden lg:grid lg:gap-4 mt-4 ${colsClass}`}>
+              {overflow.map((video, i) => (
+                <VideoCard
+                  key={i + 3}
+                  video={video}
+                  playOnHover
+                  isDimmed={hoveredId !== null && hoveredId !== i + 3}
+                  onHoverStart={() => setHoveredId(i + 3)}
+                  onHoverEnd={() => setHoveredId(null)}
+                  className={video.orientation === 'tall' ? 'aspect-[9/16] max-h-[70vh]' : 'aspect-video'}
+                  animDelay={i * 0.08}
+                  preloadMode="none"
+                />
+              ))}
+            </div>
+          );
+        })()}
       </motion.div>
     </section>
   );

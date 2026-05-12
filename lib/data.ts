@@ -11,8 +11,18 @@ export const presskitData = {
 
   photos: [
     {
+      src: "/photos/fiesta_under.jpeg",
+      title: "RANCHO APARTE",
+      description: "",
+    },
+    {
       src: "/photos/finca-la-anita.jpg",
       title: "FINCA LA ANITA",
+      description: "",
+    },
+    {
+      src: "/photos/finca_anita_byn.jpeg",
+      title: "SUNSET FINCA LA ANITA",
       description: "",
     },
     {
@@ -20,34 +30,15 @@ export const presskitData = {
       title: "PIBÄ BAR",
       description: "",
     },
-    {
-      src: "/photos/mundo-vapeo.jpg",
-      title: "MUNDO VAPPEO",
-      description: "",
-    },
-    {
-      src: "/photos/ceramica.JPEG",
-      title: "UTILCA",
-      description: "",
-    },
   ],
 
   videos: [
-    {
-      src: '/videos/video-1.MP4',
-    },
-    {
-      src: '/videos/video-2.mp4',
-    },
-    {
-      src: '/videos/piba.MP4',
-    },
-    {
-      src: '/videos/video-5.MP4',
-    },
-    {
-      src: '/videos/video-3.mp4',
-    },
+    { src: '/videos/video-1.MP4', orientation: 'wide' as const },
+    { src: '/videos/video-2.mp4', orientation: 'wide' as const },
+    { src: '/videos/rancho_aparte_3.mp4', orientation: 'wide' as const },
+    { src: '/videos/piba.MP4', orientation: 'tall' as const },
+    { src: '/videos/video-5.MP4', orientation: 'tall' as const },
+    { src: '/videos/video-3.mp4', orientation: 'tall' as const },
   ],
 
   events: {
