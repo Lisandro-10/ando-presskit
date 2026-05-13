@@ -69,9 +69,6 @@ export default function Hero() {
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/50">
             A
           </div>
-          <p className="text-[10px] uppercase tracking-[0.25em] text-white">
-            Groove y Ritmos Bailables
-          </p>
         </motion.div>
 
         {/* Center - Name + Genre (bottom-left on mobile, center on desktop) */}
