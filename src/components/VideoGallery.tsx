@@ -164,9 +164,11 @@ export default function VideoGallery() {
         transition={{ duration: 0.6 }}
         className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10"
       >
-        <h2 className="mb-12 text-center text-4xl font-bold text-white lg:text-5xl">
+        <h2 className="mb-4 text-center text-4xl font-bold text-white lg:text-5xl">
           Eventos
         </h2>
+        <div className="mx-auto mb-12 h-0.5 w-16 bg-ando-cyan" />
+
 
         {/* Mobile: vertical stack — IntersectionObserver autoplay */}
         <div className="flex flex-col gap-4 lg:hidden">

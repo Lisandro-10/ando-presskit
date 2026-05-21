@@ -21,16 +21,28 @@ export const presskitData = {
       description: "",
     },
     {
+      src: "/photos/piba_16-05-2026.jpg",
+      title: "PIBÄ BAR",
+      description: "",
+    },
+    {
       src: "/photos/finca_anita_byn.jpeg",
       title: "SUNSET FINCA LA ANITA",
       description: "",
     },
-    {
-      src: "/photos/piba.JPEG",
-      title: "PIBÄ BAR",
-      description: "",
-    },
+    // {
+    //   src: "/photos/piba.JPEG",
+    //   title: "PIBÄ BAR",
+    //   description: "",
+    // },
   ],
+
+  liveSets: [
+    {
+      title: "Hidden Echoes Vol. 1",
+      trackUrl: "https://soundcloud.com/ando-ku/ando-hidden-echoes-set-vol-1",
+    },
+  ] as Array<{ title: string; trackUrl: string; description?: string }>,
 
   videos: [
     { src: '/videos/video-1.MP4', orientation: 'wide' as const },
@@ -38,7 +50,8 @@ export const presskitData = {
     { src: '/videos/rancho_aparte_3.mp4', orientation: 'wide' as const },
     { src: '/videos/piba.MP4', orientation: 'tall' as const },
     { src: '/videos/video-5.MP4', orientation: 'tall' as const },
-    { src: '/videos/video-3.mp4', orientation: 'tall' as const },
+    { src: '/videos/piba_16-05-2026.mp4', orientation: 'tall' as const },
+    // { src: '/videos/video-3.mp4', orientation: 'tall' as const },
   ],
 
   events: {

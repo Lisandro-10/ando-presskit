@@ -22,9 +22,11 @@ export default function Biography() {
         transition={{ duration: 0.6 }}
         className="mx-auto max-w-6xl"
       >
-        <h2 className="mb-12 text-center text-4xl font-bold text-ando-text lg:text-5xl">
+        <h2 className="mb-4 text-center text-4xl font-bold text-ando-text lg:text-5xl">
           Biografía
         </h2>
+        <div className="mx-auto mb-12 h-0.5 w-16 bg-ando-cyan" />
+
 
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
           {[presskitData.biography.column1, presskitData.biography.column2].map((col, i) => (

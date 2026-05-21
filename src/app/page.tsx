@@ -1,4 +1,5 @@
 import Biography from '../components/Biography';
+import LiveSets from '../components/LiveSets';
 import PhotoGallery from '../components/PhotoGallery';
 import Contact from '../components/Contact';
 import Hero from '../components/Hero';
@@ -11,6 +12,7 @@ export default function Home() {
     <main className="min-h-screen bg-ando-navy">
       <Hero />
       <Biography />
+      <LiveSets />
       <PhotoGallery />
       {/* <Events /> */}
       <VideoGallery />
