@@ -46,11 +46,12 @@ export const presskitData = {
 
   videos: [
     { src: '/videos/video-1.MP4', orientation: 'wide' as const },
-    { src: '/videos/video-2.mp4', orientation: 'wide' as const },
+    { src: '/videos/piba_16-05-2026.mp4', orientation: 'tall' as const },
     { src: '/videos/rancho_aparte_3.mp4', orientation: 'wide' as const },
     { src: '/videos/piba.MP4', orientation: 'tall' as const },
+    { src: '/videos/video-2.mp4', orientation: 'wide' as const },
     { src: '/videos/video-5.MP4', orientation: 'tall' as const },
-    { src: '/videos/piba_16-05-2026.mp4', orientation: 'tall' as const },
+
     // { src: '/videos/video-3.mp4', orientation: 'tall' as const },
   ],
 
