@@ -42,6 +42,10 @@ export const presskitData = {
       title: "Hidden Echoes Vol. 1",
       trackUrl: "https://soundcloud.com/ando-ku/ando-hidden-echoes-set-vol-1",
     },
+    {
+      title: "Echoes in the Dark Set (Vol.2)",
+      trackUrl: "https://soundcloud.com/ando-ku/ando-echoes-in-the-dark-set"
+    }
   ] as Array<{ title: string; trackUrl: string; description?: string }>,
 
   videos: [
