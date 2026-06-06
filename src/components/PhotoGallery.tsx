@@ -49,9 +49,9 @@ export default function PhotoGallery() {
         </p>
         {/* Dots — mobile only */}
         <div className="flex gap-2 lg:hidden">
-          {photos.map((_, index) => (
+          {photos.map((photo, index) => (
             <button
-              key={index}
+              key={photo.src}
               onClick={() => {
                 setDirection(index > currentIndex ? 1 : -1);
                 setCurrentIndex(index);

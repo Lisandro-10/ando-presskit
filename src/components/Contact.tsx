@@ -20,7 +20,7 @@ export default function Contact() {
         <div className="space-y-6">
           {presskitData.contacts.map((contact, index) => (
             <motion.div
-              key={index}
+              key={contact.name}
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -46,10 +46,10 @@ export default function Contact() {
           Consultas Directas
         </p>
         <a
-          href="mailto:info.ando.ku@gmail.com"
+          href={`mailto:${presskitData.directEmail}`}
           className="text-lg text-white transition-colors hover:text-ando-cyan"
         >
-          info.ando.ku@gmail.com
+          {presskitData.directEmail}
         </a>
       </motion.div>
     </section>

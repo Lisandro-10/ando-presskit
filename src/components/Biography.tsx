@@ -1,7 +1,21 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { presskitData } from '../../lib/data';
+import { presskitData, type BiographySegment } from '../../lib/data';
+
+function renderSegment(segment: BiographySegment, i: number) {
+  if (segment.emphasis === 'brand') {
+    return (
+      <span key={i} className="font-orbitron">
+        {segment.text}
+      </span>
+    );
+  }
+  if (segment.emphasis === 'strong') {
+    return <strong key={i}>{segment.text}</strong>;
+  }
+  return <span key={i}>{segment.text}</span>;
+}
 
 const cardVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -31,7 +45,7 @@ export default function Biography() {
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
           {[presskitData.biography.column1, presskitData.biography.column2].map((col, i) => (
             <motion.div
-              key={i}
+              key={i === 0 ? 'column1' : 'column2'}
               custom={i}
               variants={cardVariants}
               initial="hidden"
@@ -48,10 +62,9 @@ export default function Biography() {
                     : 'radial-gradient(ellipse at 70% 20%, rgba(139,92,246,0.25) 0%, transparent 70%)',
                 }}
               />
-              <p
-                className="font-spaceGrotesk text-base leading-relaxed text-white/70 [&_strong]:font-semibold [&_strong]:text-white"
-                dangerouslySetInnerHTML={{ __html: col }}
-              />
+              <p className="font-spaceGrotesk text-base leading-relaxed text-white/70 [&_strong]:font-semibold [&_strong]:text-white">
+                {col.map(renderSegment)}
+              </p>
             </motion.div>
           ))}
         </div>

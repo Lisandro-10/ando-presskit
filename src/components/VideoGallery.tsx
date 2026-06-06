@@ -2,13 +2,8 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { presskitData } from '../../lib/data';
+import { presskitData, type Video } from '../../lib/data';
 import { FaVolumeMute, FaVolumeUp } from 'react-icons/fa';
-
-interface Video {
-  src: string;
-  orientation?: 'tall' | 'wide';
-}
 
 interface VideoCardProps {
   video: Video;
@@ -151,7 +146,7 @@ function VideoCard({
 }
 
 export default function VideoGallery() {
-  const videos = presskitData.videos as Video[];
+  const videos = presskitData.videos;
   const [hoveredId1, setHoveredId1] = useState<number | null>(null);
   const [hoveredId2, setHoveredId2] = useState<number | null>(null);
 
@@ -173,7 +168,7 @@ export default function VideoGallery() {
         {/* Mobile: vertical stack — IntersectionObserver autoplay */}
         <div className="flex flex-col gap-4 lg:hidden">
           {videos.map((video, index) => (
-            <VideoCard key={index} video={video} animDelay={index * 0.05} />
+            <VideoCard key={video.src} video={video} animDelay={index * 0.05} />
           ))}
         </div>
 
@@ -196,7 +191,7 @@ export default function VideoGallery() {
             />
             {videos.slice(1, 3).map((video, i) => (
               <VideoCard
-                key={i + 1}
+                key={video.src}
                 video={video}
                 playOnHover
                 isDimmed={hoveredId1 !== null && hoveredId1 !== i + 1}
@@ -216,7 +211,7 @@ export default function VideoGallery() {
           >
             {videos.slice(4, 6).map((video, i) => (
               <VideoCard
-                key={i + 1}
+                key={video.src}
                 video={video}
                 playOnHover
                 isDimmed={hoveredId2 !== null && hoveredId2 !== i + 1}

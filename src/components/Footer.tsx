@@ -80,7 +80,7 @@ export default function Footer() {
         <p className="text-4xl font-bold text-white lg:text-5xl">ANDO</p>
 
         <p className="text-[10px] uppercase tracking-[0.2em] text-white/30">
-          © {new Date().getFullYear()} Ando-Ku Project. All Rights Reserved.
+          © {new Date().getFullYear()} Ando Project. All Rights Reserved.
         </p>
       </div>
     </footer>

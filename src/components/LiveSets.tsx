@@ -3,12 +3,6 @@
 import { motion } from 'framer-motion';
 import { presskitData } from '../../lib/data';
 
-interface LiveSet {
-  title: string;
-  trackUrl: string;
-  description?: string;
-}
-
 function buildEmbedUrl(trackUrl: string): string {
   return (
     `https://w.soundcloud.com/player/?url=${encodeURIComponent(trackUrl)}` +
@@ -18,7 +12,7 @@ function buildEmbedUrl(trackUrl: string): string {
 }
 
 export default function LiveSets() {
-  const sets = presskitData.liveSets as LiveSet[];
+  const sets = presskitData.liveSets;
 
   return (
     <section className="relative bg-ando-navy py-16 lg:py-20 overflow-hidden">
@@ -45,7 +39,7 @@ export default function LiveSets() {
         >
           {sets.map((set, index) => (
             <motion.div
-              key={index}
+              key={set.trackUrl}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
