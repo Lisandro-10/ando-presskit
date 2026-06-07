@@ -2,8 +2,12 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { presskitData, type Video } from '../../lib/data';
+import type { Video } from '../../lib/data';
 import { FaVolumeMute, FaVolumeUp } from 'react-icons/fa';
+
+interface VideoGalleryProps {
+  videos: Video[];
+}
 
 interface VideoCardProps {
   video: Video;
@@ -13,7 +17,6 @@ interface VideoCardProps {
   onHoverEnd?: () => void;
   className?: string;
   animDelay?: number;
-  preloadMode?: 'metadata' | 'none';
 }
 
 function VideoCard({
@@ -24,14 +27,12 @@ function VideoCard({
   onHoverEnd,
   className = '',
   animDelay = 0,
-  preloadMode = 'metadata',
 }: VideoCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isInView, setIsInView] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
 
-  // IntersectionObserver — mobile only (when not playOnHover)
   useEffect(() => {
     if (playOnHover) return;
     const video = videoRef.current;
@@ -74,7 +75,7 @@ function VideoCard({
   const handleVideoTap = () => {
     if (playOnHover) return;
     if (!videoRef.current) return;
-    if (videoRef.current.paused) videoRef.current.play().catch(() => { });
+    if (videoRef.current.paused) videoRef.current.play().catch(() => {});
     else videoRef.current.pause();
   };
 
@@ -92,8 +93,9 @@ function VideoCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: animDelay }}
-      className={`group relative overflow-hidden rounded-lg bg-white/5 cursor-pointer transition-[filter,opacity] duration-500 ${isDimmed ? 'opacity-50 lg:opacity-100 lg:blur-sm lg:brightness-50' : ''
-        } ${className}`}
+      className={`group relative overflow-hidden rounded-lg bg-white/5 cursor-pointer transition-[filter,opacity] duration-500 ${
+        isDimmed ? 'opacity-50 lg:opacity-100 lg:blur-sm lg:brightness-50' : ''
+      } ${className}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleVideoTap}
@@ -101,14 +103,15 @@ function VideoCard({
       <video
         ref={videoRef}
         src={video.src}
+        poster={video.poster}
         loop
         muted
         playsInline
-        preload={preloadMode}
+        preload="none"
         className="h-full w-full object-cover"
       />
 
-      {/* Play indicator — mobile (IntersectionObserver mode) */}
+      {/* Play indicator — mobile */}
       {!playOnHover && !isPlaying && isInView && (
         <div className="absolute inset-0 flex items-center justify-center bg-black/30">
           <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
@@ -119,7 +122,7 @@ function VideoCard({
         </div>
       )}
 
-      {/* Hover play overlay — desktop Bento */}
+      {/* Hover play overlay — desktop */}
       {playOnHover && !isPlaying && (
         <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
           <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
@@ -139,16 +142,16 @@ function VideoCard({
         {isMuted ? <FaVolumeMute className="text-lg" /> : <FaVolumeUp className="text-lg" />}
       </button>
 
-      {/* Accent line */}
       <div className="absolute bottom-0 left-0 right-0 h-0.5 origin-left scale-x-0 bg-ando-cyan transition-transform duration-300 group-hover:scale-x-100" />
     </motion.div>
   );
 }
 
-export default function VideoGallery() {
-  const videos = presskitData.videos;
+export default function VideoGallery({ videos }: VideoGalleryProps) {
   const [hoveredId1, setHoveredId1] = useState<number | null>(null);
   const [hoveredId2, setHoveredId2] = useState<number | null>(null);
+
+  if (videos.length === 0) return null;
 
   return (
     <section className="relative bg-ando-navy py-16 lg:py-20 overflow-hidden">
@@ -164,17 +167,14 @@ export default function VideoGallery() {
         </h2>
         <div className="mx-auto mb-12 h-0.5 w-16 bg-ando-cyan" />
 
-
-        {/* Mobile: vertical stack — IntersectionObserver autoplay */}
+        {/* Mobile: vertical stack */}
         <div className="flex flex-col gap-4 lg:hidden">
           {videos.map((video, index) => (
             <VideoCard key={video.src} video={video} animDelay={index * 0.05} />
           ))}
         </div>
 
-        {/* Desktop: Bento asymmetric grid — only if >= 3 videos
-            video[0] = hero (col-span-2 row-span-2, left 2/3)
-            videos[1-2] = 2 videos stacked vertically (right 1/3) */}
+        {/* Desktop: Bento grid — first 3 */}
         {videos.length >= 3 && (
           <div
             className="hidden lg:grid lg:grid-cols-2 lg:grid-rows-2 lg:gap-4"
@@ -204,6 +204,7 @@ export default function VideoGallery() {
           </div>
         )}
 
+        {/* Desktop: Bento grid — videos 4-6 */}
         {videos.length >= 6 && (
           <div
             className="hidden lg:grid lg:grid-cols-2 lg:grid-rows-2 lg:gap-4 lg:mt-4"
@@ -232,7 +233,6 @@ export default function VideoGallery() {
             />
           </div>
         )}
-
       </motion.div>
     </section>
   );

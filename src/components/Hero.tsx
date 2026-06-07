@@ -4,10 +4,14 @@ import { useRef } from 'react';
 import { motion, useMotionValue, useTransform, useSpring, useScroll } from 'framer-motion';
 import Image from 'next/image';
 
-export default function Hero() {
+interface HeroProps {
+  tagline?: string;
+  heroImageUrl?: string;
+}
+
+export default function Hero({ tagline, heroImageUrl }: HeroProps) {
   const sectionRef = useRef<HTMLElement>(null);
 
-  // Desktop: mouse-based parallax on the title
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const springX = useSpring(mouseX, { stiffness: 60, damping: 20 });
@@ -26,9 +30,10 @@ export default function Hero() {
     mouseY.set(0);
   };
 
-  // Mobile: scroll-based parallax on the title
   const { scrollY } = useScroll();
   const scrollTitleY = useTransform(scrollY, [0, 400], [0, -30]);
+
+  const imageSrc = heroImageUrl ?? '/photos/hero-bg.jpg';
 
   return (
     <section
@@ -45,7 +50,7 @@ export default function Hero() {
           transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
         >
           <Image
-            src="/photos/hero-bg.jpg"
+            src={imageSrc}
             alt="ANDO DJ Performance"
             fill
             className="object-cover"
@@ -53,13 +58,12 @@ export default function Hero() {
           />
         </motion.div>
         <div className="absolute inset-0 bg-gradient-to-b from-ando-navy/60 via-transparent to-ando-navy" />
-        {/* Grain/noise texture */}
         <div className="hero-grain absolute inset-0" />
       </div>
 
       {/* Content */}
       <div className="relative z-10 flex h-full flex-col px-6 lg:px-10">
-        {/* Top Bar - Logo + Tagline */}
+        {/* Top Bar */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -71,16 +75,14 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* Center - Name + Genre (bottom-left on mobile, center on desktop) */}
+        {/* Center - Name + Genre */}
         <div className="flex flex-1 flex-col items-start justify-end pb-16 lg:items-center lg:justify-center lg:pb-0">
           {/* Desktop: mouse parallax */}
           <motion.h1
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.3 }}
-            style={{
-              textShadow: '0 2px 20px rgba(0,0,0,0.5)',
-            }}
+            style={{ textShadow: '0 2px 20px rgba(0,0,0,0.5)' }}
             className="hidden text-9xl font-bold text-white lg:block"
           >
             <motion.span style={{ x: titleX, y: titleY, display: 'inline-block' }}>
@@ -92,10 +94,7 @@ export default function Hero() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.3 }}
-            style={{
-              textShadow: '0 2px 20px rgba(0,0,0,0.5)',
-              y: scrollTitleY,
-            }}
+            style={{ textShadow: '0 2px 20px rgba(0,0,0,0.5)', y: scrollTitleY }}
             className="text-7xl font-bold text-white lg:hidden"
           >
             ANDO.
@@ -107,7 +106,8 @@ export default function Hero() {
             className="mt-3 text-sm tracking-[0.2em] text-white/90 uppercase md:tracking-[0.3em]"
             style={{ textShadow: '0 1px 10px rgba(0,0,0,0.7)' }}
           >
-            <span className="text-ando-cyan">| </span>Progressive House/ Tech House
+            <span className="text-ando-cyan">| </span>
+            {tagline ?? 'Progressive House/ Tech House'}
           </motion.p>
         </div>
       </div>

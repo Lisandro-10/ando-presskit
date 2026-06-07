@@ -1,7 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { presskitData } from '../../lib/data';
+import type { LiveSet } from '../../lib/data';
+
+interface LiveSetsProps {
+  sets: LiveSet[];
+}
 
 function buildEmbedUrl(trackUrl: string): string {
   return (
@@ -11,9 +15,7 @@ function buildEmbedUrl(trackUrl: string): string {
   );
 }
 
-export default function LiveSets() {
-  const sets = presskitData.liveSets;
-
+export default function LiveSets({ sets }: LiveSetsProps) {
   return (
     <section className="relative bg-ando-navy py-16 lg:py-20 overflow-hidden">
       <motion.div
