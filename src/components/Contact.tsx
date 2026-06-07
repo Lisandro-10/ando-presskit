@@ -1,9 +1,14 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { presskitData } from '../../lib/data';
+import type { Contact as ContactType } from '../../lib/data';
 
-export default function Contact() {
+interface ContactProps {
+  contacts: ContactType[];
+  directEmail?: string;
+}
+
+export default function Contact({ contacts, directEmail }: ContactProps) {
   return (
     <section className="px-6 py-16 lg:px-10 lg:py-24 bg-ando-navy">
       <motion.div
@@ -18,7 +23,7 @@ export default function Contact() {
         </p>
 
         <div className="space-y-6">
-          {presskitData.contacts.map((contact, index) => (
+          {contacts.map((contact, index) => (
             <motion.div
               key={contact.name}
               initial={{ opacity: 0, y: 10 }}
@@ -39,18 +44,20 @@ export default function Contact() {
           ))}
         </div>
 
-        {/* Divider */}
-        <div className="my-10 h-px bg-white/10" />
-
-        <p className="mb-4 text-[10px] uppercase tracking-[0.3em] text-ando-muted">
-          Consultas Directas
-        </p>
-        <a
-          href={`mailto:${presskitData.directEmail}`}
-          className="text-lg text-white transition-colors hover:text-ando-cyan"
-        >
-          {presskitData.directEmail}
-        </a>
+        {directEmail && (
+          <>
+            <div className="my-10 h-px bg-white/10" />
+            <p className="mb-4 text-[10px] uppercase tracking-[0.3em] text-ando-muted">
+              Consultas Directas
+            </p>
+            <a
+              href={`mailto:${directEmail}`}
+              className="text-lg text-white transition-colors hover:text-ando-cyan"
+            >
+              {directEmail}
+            </a>
+          </>
+        )}
       </motion.div>
     </section>
   );

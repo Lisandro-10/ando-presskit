@@ -1,10 +1,15 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { presskitData } from '../../lib/data';
+import type { EventInfo } from '../../lib/data';
 
-export default function Events() {
-  const { main, upcoming } = presskitData.events;
+interface EventsProps {
+  main?: EventInfo;
+  upcoming?: EventInfo[];
+}
+
+export default function Events({ main, upcoming = [] }: EventsProps) {
+  if (!main) return null;
 
   return (
     <section className="px-6 py-16 lg:px-10 lg:py-24 bg-ando-navy">
@@ -19,7 +24,6 @@ export default function Events() {
           Próximos Eventos
         </h2>
 
-        {/* Main Event */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -30,18 +34,13 @@ export default function Events() {
           <p className="mb-3 text-[10px] uppercase tracking-[0.3em] text-ando-muted">
             Main Event
           </p>
-          <h3 className="text-2xl font-bold text-white lg:text-3xl">
-            {main.name}
-          </h3>
-          <p className="mt-2 text-sm text-white/50">
-            {main.location}
-          </p>
+          <h3 className="text-2xl font-bold text-white lg:text-3xl">{main.name}</h3>
+          <p className="mt-2 text-sm text-white/50">{main.location}</p>
           <p className="mt-4 text-3xl font-bold tracking-wider text-white lg:text-4xl">
             {main.date}
           </p>
         </motion.div>
 
-        {/* Upcoming */}
         <div className="grid grid-cols-2 gap-4">
           {upcoming.map((event, index) => (
             <motion.div
@@ -54,9 +53,7 @@ export default function Events() {
             >
               <h4 className="text-base font-bold text-white">{event.name}</h4>
               <p className="mt-1 text-xs text-white/50">{event.location}</p>
-              <p className="mt-3 text-2xl font-bold tracking-wider text-white">
-                {event.date}
-              </p>
+              <p className="mt-3 text-2xl font-bold tracking-wider text-white">{event.date}</p>
             </motion.div>
           ))}
         </div>

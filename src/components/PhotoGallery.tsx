@@ -3,15 +3,14 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import { presskitData } from '../../lib/data';
+import type { Photo } from '../../lib/data';
 
-export default function PhotoGallery() {
-  const photos = presskitData.photos;
+interface PhotoGalleryProps {
+  photos: Photo[];
+}
 
-  // Desktop: hover state for contact sheet effect
+export default function PhotoGallery({ photos }: PhotoGalleryProps) {
   const [hoveredId, setHoveredId] = useState<number | null>(null);
-
-  // Mobile: swipeable carousel state
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [touchStart, setTouchStart] = useState<number | null>(null);
@@ -39,6 +38,8 @@ export default function PhotoGallery() {
     }
     setTouchStart(null);
   };
+
+  if (photos.length === 0) return null;
 
   return (
     <section className="w-full bg-ando-navy">
@@ -93,7 +94,6 @@ export default function PhotoGallery() {
       <div className="hidden lg:block px-10 pb-12">
         <div className="grid grid-cols-4 gap-1.5 overflow-visible">
           {photos.map((photo, index) => (
-            // Outer: entry animation (fires once on scroll)
             <motion.div
               key={photo.src}
               initial={{ opacity: 0, y: 30 }}
@@ -102,7 +102,6 @@ export default function PhotoGallery() {
               transition={{ duration: 0.55, delay: index * 0.09 }}
               style={{ position: 'relative' }}
             >
-              {/* Inner: ongoing interaction state */}
               <motion.div
                 animate={{
                   scale: hoveredId === index ? 1.12 : hoveredId !== null ? 0.97 : 1,
@@ -122,7 +121,6 @@ export default function PhotoGallery() {
                   className="object-cover grayscale"
                 />
 
-                {/* Número de foto + título (visible en hover) */}
                 <motion.div
                   animate={{ opacity: hoveredId === index ? 1 : 0 }}
                   transition={{ duration: 0.2 }}
@@ -138,7 +136,6 @@ export default function PhotoGallery() {
                   </div>
                 </motion.div>
 
-                {/* Línea cyan inferior */}
                 <motion.div
                   animate={{ scaleX: hoveredId === index ? 1 : 0 }}
                   transition={{ duration: 0.25 }}

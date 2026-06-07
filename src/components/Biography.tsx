@@ -1,7 +1,12 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { presskitData, type BiographySegment } from '../../lib/data';
+import type { BiographySegment } from '../../lib/data';
+
+interface BiographyProps {
+  column1: BiographySegment[];
+  column2: BiographySegment[];
+}
 
 function renderSegment(segment: BiographySegment, i: number) {
   if (segment.emphasis === 'brand') {
@@ -26,7 +31,7 @@ const cardVariants = {
   }),
 };
 
-export default function Biography() {
+export default function Biography({ column1, column2 }: BiographyProps) {
   return (
     <section className="px-6 py-20 lg:px-12 lg:py-32 bg-ando-navy">
       <motion.div
@@ -41,9 +46,8 @@ export default function Biography() {
         </h2>
         <div className="mx-auto mb-12 h-0.5 w-16 bg-ando-cyan" />
 
-
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
-          {[presskitData.biography.column1, presskitData.biography.column2].map((col, i) => (
+          {[column1, column2].map((col, i) => (
             <motion.div
               key={i === 0 ? 'column1' : 'column2'}
               custom={i}
@@ -53,7 +57,6 @@ export default function Biography() {
               viewport={{ once: true }}
               className="relative rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md lg:p-8"
             >
-              {/* Gradiente decorativo debajo de la tarjeta */}
               <div
                 className="pointer-events-none absolute inset-0 -z-10 rounded-2xl opacity-30 blur-2xl"
                 style={{
