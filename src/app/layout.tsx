@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: 'ANDO - DJ Presskit',
     description: 'Progressive House & Tech House',
     type: 'website',
-    images: ['/hero-bg.jpg'],
+    images: ['/photos/hero-bg.jpg'],
   },
 };
 

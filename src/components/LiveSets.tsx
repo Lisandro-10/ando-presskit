@@ -7,15 +7,44 @@ interface LiveSetsProps {
   sets: LiveSet[];
 }
 
-function buildEmbedUrl(trackUrl: string): string {
+/** Devuelve el id de un video de YouTube, o null si la URL no es de YouTube. */
+function youtubeId(url: string): string | null {
+  let parsed: URL;
+  try {
+    parsed = new URL(url);
+  } catch {
+    return null;
+  }
+
+  if (parsed.hostname.endsWith('youtu.be')) {
+    return parsed.pathname.slice(1) || null;
+  }
+  if (!/(^|\.)youtube(-nocookie)?\.com$/.test(parsed.hostname)) {
+    return null;
+  }
+
+  const v = parsed.searchParams.get('v');
+  if (v) return v;
+
+  const match = parsed.pathname.match(/^\/(?:embed|live|shorts|v)\/([^/?#]+)/);
+  return match ? match[1] : null;
+}
+
+function buildEmbedUrl(url: string): string {
+  const id = youtubeId(url);
+  if (id) {
+    return `https://www.youtube-nocookie.com/embed/${id}?rel=0`;
+  }
   return (
-    `https://w.soundcloud.com/player/?url=${encodeURIComponent(trackUrl)}` +
+    `https://w.soundcloud.com/player/?url=${encodeURIComponent(url)}` +
     `&visual=true&color=%2300d9ff&auto_play=false&hide_related=true` +
     `&show_comments=false&show_user=true&show_reposts=false&show_teaser=false`
   );
 }
 
 export default function LiveSets({ sets }: LiveSetsProps) {
+  if (sets.length === 0) return null;
+
   return (
     <section className="relative bg-ando-navy py-16 lg:py-20 overflow-hidden">
       <motion.div
@@ -39,25 +68,33 @@ export default function LiveSets({ sets }: LiveSetsProps) {
               : 'grid grid-cols-1 md:grid-cols-2 gap-6'
           }
         >
-          {sets.map((set, index) => (
-            <motion.div
-              key={set.trackUrl}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="overflow-hidden rounded-xl bg-white/5 backdrop-blur-md"
-            >
-              <iframe
-                src={buildEmbedUrl(set.trackUrl)}
-                title={set.title}
-                className="h-[300px] w-full md:h-[450px]"
-                loading="lazy"
-                allow="autoplay"
-                style={{ border: 'none' }}
-              />
-            </motion.div>
-          ))}
+          {sets.map((set, index) => {
+            // El player de SoundCloud llena cualquier alto; el de YouTube es
+            // 16:9 y con alto fijo queda con barras negras.
+            const isYouTube = youtubeId(set.url) !== null;
+
+            return (
+              <motion.div
+                key={set.url}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="overflow-hidden rounded-xl bg-white/5 backdrop-blur-md"
+              >
+                <iframe
+                  src={buildEmbedUrl(set.url)}
+                  title={set.title}
+                  className={
+                    isYouTube ? 'aspect-video w-full' : 'h-[300px] w-full md:h-[450px]'
+                  }
+                  loading="lazy"
+                  allow="autoplay; encrypted-media; picture-in-picture"
+                  style={{ border: 'none' }}
+                />
+              </motion.div>
+            );
+          })}
         </div>
       </motion.div>
     </section>
