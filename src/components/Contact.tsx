@@ -81,8 +81,8 @@ export default function Contact({ imageSrc, people, directEmail, socials }: Cont
         transition={{ duration: 0.6 }}
         className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-2 lg:items-center lg:gap-16"
       >
-        {/* Info — primero en mobile: el CTA no debe caer debajo de la foto */}
-        <div>
+        {/* Info — segunda en mobile (la foto abre la sección), primera columna en desktop */}
+        <div className="order-2 lg:order-1">
           <h2 className="font-orbitron text-4xl font-bold text-white lg:text-5xl">
             Contact
           </h2>
@@ -143,7 +143,7 @@ export default function Contact({ imageSrc, people, directEmail, socials }: Cont
         </div>
 
         {/* Imagen — acá la foto es contenido, no fondo: sin scrim y sin priority */}
-        <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl">
+        <div className="relative order-1 aspect-[4/5] w-full overflow-hidden rounded-2xl lg:order-2">
           <Image
             src={imageSrc}
             alt="ANDO"

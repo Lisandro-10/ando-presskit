@@ -30,7 +30,7 @@ Four standalone components, all `'use client'` with Framer Motion. They receive 
 - `Hero` — background image + scrim + grain. Its text renders visible from SSR on purpose: it is the LCP element, and gating it behind a Framer entrance animation pushed LCP past 2.5 s. Parallax stays.
 - `Events` — background photo (`grayscale`) + scrim; rows sorted newest-first, paginated at 5 with a "ver todas" toggle.
 - `LiveSets` — flat `bg-ando-navy`; `buildEmbedUrl` handles both SoundCloud and YouTube.
-- `Contact` — two columns (info + photo), stacking info-first on mobile.
+- `Contact` — two columns (info + photo); on mobile they reorder via `order-*` so the photo comes first and the info below.
 
 **Styling**
 - Tailwind with custom tokens: `ando-navy` (`#111111`), `ando-cyan` (`#00d9ff`), `ando-text`, `ando-muted`
