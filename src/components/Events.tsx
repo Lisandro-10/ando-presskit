@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import type { EventInfo } from '../../lib/data';
@@ -32,14 +32,36 @@ function compareByDate(a: EventInfo, b: EventInfo): number {
   return tb - ta;
 }
 
-function EventRow({ event }: { event: EventInfo }) {
+/** Medianoche de hoy: un evento sigue siendo "próximo" durante el día que ocurre. */
+function startOfToday(): number {
+  const d = new Date();
+  d.setHours(0, 0, 0, 0);
+  return d.getTime();
+}
+
+function EventRow({ event, isUpcoming }: { event: EventInfo; isUpcoming: boolean }) {
   return (
-    <div className="flex flex-col gap-1 rounded-xl border border-white/10 bg-black/50 p-5 backdrop-blur-md sm:flex-row sm:items-center sm:justify-between sm:gap-6">
+    <div
+      className={`flex flex-col gap-1 rounded-xl border border-white/10 bg-black/50 p-5 backdrop-blur-md transition-colors duration-500 sm:flex-row sm:items-center sm:justify-between sm:gap-6 ${
+        isUpcoming ? 'border-l-2 border-l-ando-cyan' : ''
+      }`}
+    >
       <div>
-        <h3 className="text-base font-bold text-white lg:text-lg">{event.name}</h3>
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+          <h3 className="text-base font-bold text-white lg:text-lg">{event.name}</h3>
+          {isUpcoming && (
+            <span className="rounded-full border border-ando-cyan/40 bg-ando-cyan/10 px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-[0.2em] text-ando-cyan">
+              Próxima
+            </span>
+          )}
+        </div>
         <p className="mt-1 font-spaceGrotesk text-sm text-white/70">{event.location}</p>
       </div>
-      <p className="font-spaceGrotesk text-lg font-bold tabular-nums tracking-wider text-ando-cyan lg:text-xl">
+      <p
+        className={`font-spaceGrotesk text-lg font-bold tabular-nums tracking-wider transition-colors duration-500 lg:text-xl ${
+          isUpcoming ? 'text-ando-cyan' : 'text-white/75'
+        }`}
+      >
         {event.date}
       </p>
     </div>
@@ -50,7 +72,18 @@ export default function Events({ imageSrc, list }: EventsProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const [expanded, setExpanded] = useState(false);
 
+  // La página es estática: el HTML se genera en el build y puede servirse meses
+  // después, así que "hoy" solo existe en el cliente. Calcularlo durante el render
+  // daría un mismatch de hidratación apenas una fecha cruce al pasado. En el SSR
+  // todas las filas salen como pasadas y las próximas se encienden al montar —
+  // de ahí el `transition-colors` en EventRow.
+  const [today, setToday] = useState<number | null>(null);
+  useEffect(() => setToday(startOfToday()), []);
+
   const sorted = useMemo(() => [...list].sort(compareByDate), [list]);
+
+  const isUpcoming = (event: EventInfo) =>
+    today !== null && toTime(event.date) >= today;
 
   if (sorted.length === 0) return null;
 
@@ -87,7 +120,7 @@ export default function Events({ imageSrc, list }: EventsProps) {
       >
         <div className="mb-12 text-center">
           <h2 className="font-orbitron text-4xl font-bold text-white lg:text-5xl">
-            Próximas Fechas
+            Fechas
           </h2>
           <div className="mx-auto mt-4 h-0.5 w-16 bg-ando-cyan" />
         </div>
@@ -101,7 +134,7 @@ export default function Events({ imageSrc, list }: EventsProps) {
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
             >
-              <EventRow event={event} />
+              <EventRow event={event} isUpcoming={isUpcoming(event)} />
             </motion.div>
           ))}
 
@@ -118,7 +151,7 @@ export default function Events({ imageSrc, list }: EventsProps) {
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.4, delay: Math.min(index, 6) * 0.05 }}
                 >
-                  <EventRow event={event} />
+                  <EventRow event={event} isUpcoming={isUpcoming(event)} />
                 </motion.div>
               ))}
           </AnimatePresence>

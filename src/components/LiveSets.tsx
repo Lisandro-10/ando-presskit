@@ -80,14 +80,18 @@ export default function LiveSets({ sets }: LiveSetsProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="overflow-hidden rounded-xl bg-white/5 backdrop-blur-md"
+                // En una sola columna cada card mide lo que mide su player. Desde
+                // `md` la grilla estira todas las cards de la fila al alto de la
+                // más alta, así que se les fija el mismo 16:9 y el iframe lo llena:
+                // sin ese alto común, la card corta (YouTube) queda con fondo muerto.
+                className="relative overflow-hidden rounded-xl bg-white/5 backdrop-blur-md md:aspect-video"
               >
                 <iframe
                   src={buildEmbedUrl(set.url)}
                   title={set.title}
-                  className={
-                    isYouTube ? 'aspect-video w-full' : 'h-[300px] w-full md:h-[450px]'
-                  }
+                  className={`w-full md:absolute md:inset-0 md:h-full md:aspect-auto ${
+                    isYouTube ? 'aspect-video' : 'h-[300px]'
+                  }`}
                   loading="lazy"
                   allow="autoplay; encrypted-media; picture-in-picture"
                   style={{ border: 'none' }}

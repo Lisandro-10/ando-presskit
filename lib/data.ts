@@ -53,12 +53,20 @@ export const presskitData: PresskitData = {
     // `date` es un contrato, no texto libre: 'DD.MM.YYYY' con ceros a la izquierda.
     // El orden lo calcula Events.tsx a partir de la fecha, no del orden del array.
     list: [
-      { name: 'PIBÄ BAR', location: 'Carrodilla, Mendoza', date: '28.02.2026' },
-      { name: 'OSA Club', location: 'Mendoza, Argentina', date: '28.03.2026' },
+      { name: 'PIBÄ BAR', location: 'Vistapueblo, Carrodilla', date: '28.02.2026' },
+      { name: 'Rancho Aparte', location: '', date: '09.05.2026' },
+      { name: 'PIBÄ BAR', location: 'Vistapueblo, Carrodilla', date: '16.05.2026' },
+      { name: 'Calma Club', location: 'Bodega Giol, Maipú', date: '18.07.2026' },
+      { name: 'Birra House', location: 'Arístides Villanueva', date: '06.09.2026' },
+
     ],
   },
 
   liveSets: [
+    {
+      title: 'ANDO - Opening Set | Calma | 18/07/26',
+      url: 'https://www.youtube.com/watch?v=FBWrPMc4aCg&t=2997s',
+    },
     {
       title: 'Hidden Echoes Vol. 1',
       url: 'https://soundcloud.com/ando-ku/ando-hidden-echoes-set-vol-1',
