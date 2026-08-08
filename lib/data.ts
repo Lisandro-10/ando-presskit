@@ -44,7 +44,7 @@ export const presskitData: PresskitData = {
   hero: {
     tagline: 'Progressive House / Organic House / Underground House',
     bio: 'ANDO es un proyecto conformado por Juan Pablo y Lisandro Andia, dos primos unidos por la música y el descubrimiento de sonidos en conjunto. Su propuesta sonora gira en torno a un groove hipnótico y persistente que da identidad a cada set. El sonido oscila entre atmósferas oscuras y profundas o momentos más orgánicos, donde la melodía y la emoción cobran protagonismo, sin perder el groove hipnótico que los define. Haber crecido juntos escuchando música les permite retroalimentar sus gustos logrando una conexión que se traduce en un sello propio.',
-    imageSrc: '/photos/_MG_4448.jpg',
+    imageSrc: '/photos/_MG_4466.jpg',
   },
 
   events: {
