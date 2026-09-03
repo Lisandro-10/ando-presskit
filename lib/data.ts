@@ -42,7 +42,7 @@ export interface PresskitData {
 
 export const presskitData: PresskitData = {
   hero: {
-    tagline: 'Progressive House / Organic House / Underground House',
+    tagline: 'Progressive House / Underground House',
     bio: 'ANDO es un proyecto conformado por Juan Pablo y Lisandro Andia, dos primos unidos por la música y el descubrimiento de sonidos en conjunto. Su propuesta sonora gira en torno a un groove hipnótico y persistente que da identidad a cada set. El sonido oscila entre atmósferas oscuras y profundas o momentos más orgánicos, donde la melodía y la emoción cobran protagonismo, sin perder el groove hipnótico que los define. Haber crecido juntos escuchando música les permite retroalimentar sus gustos logrando una conexión que se traduce en un sello propio.',
     imageSrc: '/photos/_MG_4466.jpg',
   },
@@ -54,10 +54,12 @@ export const presskitData: PresskitData = {
     // El orden lo calcula Events.tsx a partir de la fecha, no del orden del array.
     list: [
       { name: 'PIBÄ BAR', location: 'Vistapueblo, Carrodilla', date: '28.02.2026' },
+      { name: 'PIBÄ BAR', location: 'Vistapueblo, Carrodilla', date: '22.08.2026' },
       { name: 'Rancho Aparte', location: '', date: '09.05.2026' },
       { name: 'PIBÄ BAR', location: 'Vistapueblo, Carrodilla', date: '16.05.2026' },
       { name: 'Calma Club', location: 'Bodega Giol, Maipú', date: '18.07.2026' },
       { name: 'Birra House', location: 'Arístides Villanueva', date: '06.09.2026' },
+      { name: 'El Rumano', location: 'Arístides Villanueva', date: '28.08.2026' }
 
     ],
   },
