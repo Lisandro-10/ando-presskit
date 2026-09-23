@@ -59,12 +59,17 @@ export const presskitData: PresskitData = {
       { name: 'PIBÄ BAR', location: 'Vistapueblo, Carrodilla', date: '16.05.2026' },
       { name: 'Calma Club', location: 'Bodega Giol, Maipú', date: '18.07.2026' },
       { name: 'Birra House', location: 'Arístides Villanueva', date: '06.09.2026' },
-      { name: 'El Rumano', location: 'Arístides Villanueva', date: '28.08.2026' }
+      { name: 'El Rumano', location: 'Arístides Villanueva', date: '28.08.2026' },
+      { name: 'Finca La Anita', location: 'Agrelo, Mendoza', date: '7-8.12.2025' },
 
     ],
   },
 
   liveSets: [
+    {
+      title: 'Birra House - ANDO | 06/09/26',
+      url: 'https://www.youtube.com/watch?v=fApQKP6bXrk',
+    },
     {
       title: 'ANDO - Opening Set | Calma | 18/07/26',
       url: 'https://www.youtube.com/watch?v=FBWrPMc4aCg&t=2997s',
