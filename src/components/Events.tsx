@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useMemo, useRef, useState, useSyncExternalStore } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import type { EventInfo } from '../../lib/data';
@@ -39,6 +39,11 @@ function startOfToday(): number {
   return d.getTime();
 }
 
+// `startOfToday` devuelve un número, así que el snapshot es estable durante el
+// día y `useSyncExternalStore` no entra en loop.
+const noSubscribe = () => () => {};
+const getServerToday = () => null;
+
 function EventRow({ event, isUpcoming }: { event: EventInfo; isUpcoming: boolean }) {
   return (
     <div
@@ -74,11 +79,11 @@ export default function Events({ imageSrc, list }: EventsProps) {
 
   // La página es estática: el HTML se genera en el build y puede servirse meses
   // después, así que "hoy" solo existe en el cliente. Calcularlo durante el render
-  // daría un mismatch de hidratación apenas una fecha cruce al pasado. En el SSR
-  // todas las filas salen como pasadas y las próximas se encienden al montar —
-  // de ahí el `transition-colors` en EventRow.
-  const [today, setToday] = useState<number | null>(null);
-  useEffect(() => setToday(startOfToday()), []);
+  // daría un mismatch de hidratación apenas una fecha cruce al pasado. El SSR y la
+  // hidratación usan el snapshot del servidor (null: todas las filas pasadas) y
+  // React re-renderiza con el del cliente — de ahí el `transition-colors` en
+  // EventRow. Sin suscripción: no se actualiza si la página cruza la medianoche.
+  const today = useSyncExternalStore(noSubscribe, startOfToday, getServerToday);
 
   const sorted = useMemo(() => [...list].sort(compareByDate), [list]);
 

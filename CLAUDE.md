@@ -14,7 +14,7 @@ No test suite is configured.
 
 ## Architecture
 
-Single-page Next.js 14 app (App Router) deployed to Vercel. The page is a DJ presskit for the duo **ANDO**.
+Single-page Next.js 16 app (App Router, React 19) deployed to Vercel. The page is a DJ presskit for the duo **ANDO**.
 
 **Data layer — `lib/data.ts`**
 All content (hero copy, photo paths, event dates, live set URLs, social links, contact info) lives in a single exported `presskitData` object. Edit this file to update any site content without touching components. There is no CMS.

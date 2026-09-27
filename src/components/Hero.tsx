@@ -5,11 +5,10 @@ import Image from 'next/image';
 
 interface HeroProps {
   tagline: string;
-  bio: string;
   imageSrc: string;
 }
 
-export default function Hero({ tagline, bio, imageSrc }: HeroProps) {
+export default function Hero({ tagline, imageSrc }: HeroProps) {
   const { scrollY } = useScroll();
   const scrollTitleY = useTransform(scrollY, [0, 400], [0, -30]);
 
@@ -62,12 +61,6 @@ export default function Hero({ tagline, bio, imageSrc }: HeroProps) {
           >
             <span className="text-ando-cyan">| </span>
             {tagline}
-          </p>
-          <p
-            className="mt-30 max-w-xl font-spaceGrotesk text-sm text-white/80 lg:text-center lg:text-base"
-            style={{ textShadow: '0 1px 10px rgba(0,0,0,0.7)' }}
-          >
-            {/* {bio} */}
           </p>
         </div>
       </div>
