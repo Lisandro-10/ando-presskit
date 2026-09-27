@@ -67,16 +67,16 @@ export const presskitData: PresskitData = {
 
   liveSets: [
     {
+      title: 'ANDO - Dj Set | Live at Quincho Rock | 16/09/2026',
+      url: 'https://www.youtube.com/watch?v=5CZJ2qCzJes',
+    },
+    {
       title: 'Birra House - ANDO | 06/09/26',
       url: 'https://www.youtube.com/watch?v=fApQKP6bXrk',
     },
     {
       title: 'ANDO - Opening Set | Calma | 18/07/26',
       url: 'https://www.youtube.com/watch?v=FBWrPMc4aCg&t=2997s',
-    },
-    {
-      title: 'Hidden Echoes Vol. 1',
-      url: 'https://soundcloud.com/ando-ku/ando-hidden-echoes-set-vol-1',
     },
     {
       title: 'Echoes in the Dark Set (Vol.2)',
