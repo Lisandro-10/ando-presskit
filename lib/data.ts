@@ -11,6 +11,14 @@ export interface LiveSet {
   url: string;
 }
 
+export interface RiderSetup {
+  /** Tipo de setup: 'Players + Mixer', 'Controladora'... */
+  label: string;
+  gear: string[];
+  /** El equipo es nuestro: lo podemos llevar. */
+  owned?: boolean;
+}
+
 export interface Person {
   name: string;
   phone: string;
@@ -31,6 +39,7 @@ export interface PresskitData {
     list: EventInfo[];
   };
   liveSets: LiveSet[];
+  techRider: RiderSetup[];
   contact: {
     imageSrc: string;
     people: Person[];
@@ -47,9 +56,6 @@ export const presskitData: PresskitData = {
 
   events: {
     imageSrc: '/photos/_MG_4296.jpg',
-    // imageSrc: '/photos/IMG_4597.jpg',
-    // `date` es un contrato, no texto libre: 'DD.MM.YYYY' con ceros a la izquierda.
-    // El orden lo calcula Events.tsx a partir de la fecha, no del orden del array.
     list: [
       { name: 'PIBÄ BAR', location: 'Vistapueblo, Carrodilla', date: '28.02.2026' },
       { name: 'PIBÄ BAR', location: 'Vistapueblo, Carrodilla', date: '22.08.2026' },
@@ -59,7 +65,7 @@ export const presskitData: PresskitData = {
       { name: 'Birra House', location: 'Arístides Villanueva', date: '06.09.2026' },
       { name: 'El Rumano', location: 'Arístides Villanueva', date: '28.08.2026' },
       { name: 'Finca La Anita', location: 'Agrelo, Mendoza', date: '7-8.12.2025' },
-
+      { name: 'Grooveoo', location: 'Complejo La Isla', date: '13.11.2026' },
     ],
   },
 
@@ -80,6 +86,15 @@ export const presskitData: PresskitData = {
       title: 'Echoes in the Dark Set (Vol.2)',
       url: 'https://soundcloud.com/ando-ku/ando-echoes-in-the-dark-set',
     },
+  ],
+
+  // Solo equipos con los que ya tocamos — sin alternativas inventadas.
+  techRider: [
+    { label: 'Players + Mixer', gear: ['Pioneer CDJ-3000X', 'Pioneer DJM-V10'] },
+    { label: 'Controladora', gear: ['Pioneer DDJ-400', 'rekordbox'], owned: true },
+    // Modelo exacto sin confirmar: standalone Pioneer con pantalla central, sin laptop.
+    // Candidatos: XDJ-RX, XDJ-RX2, XDJ-RX3, XDJ-RR o XDJ-XZ. Al confirmarlo, reemplazar.
+    { label: 'All-in-one', gear: ['Pioneer XDJ'] },
   ],
 
   contact: {

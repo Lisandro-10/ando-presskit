@@ -10,7 +10,7 @@ interface EventsProps {
   list: EventInfo[];
 }
 
-const PAGE_SIZE = 5;
+const PAGE_SIZE = 3;
 
 /** 'DD.MM.YYYY' → timestamp. El formato es fijo, ver `lib/data.ts`. */
 function toTime(date: string): number {

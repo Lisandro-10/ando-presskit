@@ -22,14 +22,15 @@ All content (hero copy, photo paths, event dates, live set URLs, social links, c
 `events.list[].date` is a contract, not free text: `'DD.MM.YYYY'` with leading zeros. `Events.tsx` parses it to sort, so a malformed date sorts to the end instead of failing loudly.
 
 **Page — `src/app/page.tsx`**
-Static (no `async`, no fetch, no ISR). Renders four sections in order: `Hero → Events → LiveSets → Contact`. Contact absorbs what used to be the footer.
+Static (no `async`, no fetch, no ISR). Renders five sections in order: `Hero → Events → LiveSets → TechRider → Contact`. Contact absorbs what used to be the footer.
 
 **Components — `src/components/`**
-Four standalone components, all `'use client'` with Framer Motion. They receive their slice of `presskitData` as props.
+Five standalone components, all `'use client'` with Framer Motion. They receive their slice of `presskitData` as props.
 
 - `Hero` — background image + scrim + grain. Its text renders visible from SSR on purpose: it is the LCP element, and gating it behind a Framer entrance animation pushed LCP past 2.5 s. Parallax stays.
 - `Events` — background photo (`grayscale`) + scrim; rows sorted newest-first, paginated at 5 with a "ver todas" toggle.
 - `LiveSets` — flat `bg-ando-navy`; `buildEmbedUrl` handles both SoundCloud and YouTube.
+- `TechRider` — flat `bg-ando-navy` with a top border; one row per setup from `techRider` in `lib/data.ts`. List only gear the duo has actually played on — no invented alternatives.
 - `Contact` — two columns (info + photo); on mobile they reorder via `order-*` so the photo comes first and the info below.
 
 **Styling**

@@ -9,10 +9,10 @@ const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-space
 export const metadata: Metadata = {
   title: 'ANDO - Progressive & Tech House DJ',
   description: 'Official presskit - Groove, Ritmos Bailables y Underground Elegante',
-  keywords: ['ANDO', 'DJ', 'Progressive House', 'Tech House', 'Electronic Music'],
+  keywords: ['ANDO', 'DJ', 'Progressive House', 'Electronic Music'],
   openGraph: {
     title: 'ANDO - DJ Presskit',
-    description: 'Progressive House & Tech House',
+    description: 'Progressive House / Underground House',
     type: 'website',
     images: ['/photos/hero-bg.jpg'],
   },
