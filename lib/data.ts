@@ -84,7 +84,7 @@ export const presskitData: PresskitData = {
     },
     {
       title: 'Echoes in the Dark Set (Vol.2)',
-      url: 'https://soundcloud.com/ando-ku/ando-echoes-in-the-dark-set',
+      url: 'https://soundcloud.com/ando-sound/ando-echoes-in-the-dark-set',
     },
   ],
 
@@ -104,7 +104,7 @@ export const presskitData: PresskitData = {
     directEmail: 'info.ando.ku@gmail.com',
     socials: [
       { label: 'ando.sound', url: 'https://instagram.com/ando.sound' },
-      { label: 'ando-ku', url: 'https://soundcloud.com/ando-ku' },
+      { label: 'ando-sound', url: 'https://soundcloud.com/ando-sound' },
     ],
   },
 };
