@@ -92,9 +92,7 @@ export const presskitData: PresskitData = {
   techRider: [
     { label: 'Players + Mixer', gear: ['Pioneer CDJ-3000X', 'Pioneer DJM-V10'] },
     { label: 'Controladora', gear: ['Pioneer DDJ-400', 'rekordbox'], owned: true },
-    // Modelo exacto sin confirmar: standalone Pioneer con pantalla central, sin laptop.
-    // Candidatos: XDJ-RX, XDJ-RX2, XDJ-RX3, XDJ-RR o XDJ-XZ. Al confirmarlo, reemplazar.
-    { label: 'All-in-one', gear: ['Pioneer XDJ'] },
+    { label: 'All-in-one', gear: ['Pioneer XDJ-RX3'] },
   ],
 
   contact: {
